@@ -1,113 +1,113 @@
-body { 
-	margin: 0;
-	padding; 0;
-	font-size: 62.5%;
-	font-family: Georgia, "Times New Roman", Times, serif;
-}
-
-.container { 
-	width: 960px;
-	margin: 10px auto;
-	position: relative;
-	font-size: 120%;
-}
-
-.leftcol { 
-	width: 480px;
-	float: left;
-}
-
-.rightcol { 
-	width: 480px;
-	text-align: right;
-	float: left;
-}
-
-#the-text { 
-	width: 948px;
-	height: 600px;
-	font: 14px "Andale Mono", "Courier New", monospace;
-	border: 4px solid #000;
-	color: #000;
-	background: #fff;
-	padding: 6px;
-	margin: 10px auto;
-}
-
-#the-text.paused { 
-	background: #ddd;
-	border: 4px solid #bbb;
-	color: #999;
-}
-
-#the-text.done { 
-	background: lightgreen;
-	border: 4px solid darkgreen;
-	color: darkgreen;
-}
-
-#the-text.warn { 
-	border: 4px solid #ff4500;
-	color: #ff4500;
-}
-
-#the-text.annoy-1 { 
-	border: 4px solid #b22222;
-	color: #b22222;
-}
-
-#the-text.annoy-2 { 
-	border: 4px solid #f00;
-	color: #f00;
-}
-
-#the-text.annoy-3 { 
-	border: 4px solid #000;
-	background: #f00;
-	color: #fff;
-}
-
-#html, #manuscript { 
-	position: absolute;
-	width: 800px;
-	height: 600px;
-	border: 10px solid #ccc;
-	top: 50%;
-	left: 50%;
-	margin-left: -400px;
-	margin-top: -300px;
-	background: white;
-	overflow: auto;
-	padding: 10px;
-	font-size: 150%;
-}
-
-#manuscript { 
-	font: 14px/28px "Courier New", monospace;
-}
-
-#manuscript p { 
-	text-indent: 30px;
-}
-
-span.label { 
-	font-style: italic;
-	font-weight: bold;
-	color: #666;
-}
-
-input.text { 
-	border: 1px solid #ccc;
-	padding: 3px;
-	font: 14px/28px "Courier New", monospace;
-	width: 72px;
-	margin-left: 10px;
-}
-
-#current-words, #time-elapsed { 
-	font-size: 200%;
-	font-weight: bold;
-	font-style: normal;
-	color: #000;
-	padding-left: 10px;
-}
+body { 
+	margin: 0;
+	padding; 0;
+	font-size: 62.5%;
+	font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.container { 
+	width: 960px;
+	margin: 10px auto;
+	position: relative;
+	font-size: 120%;
+}
+
+.leftcol { 
+	width: 480px;
+	float: left;
+}
+
+.rightcol { 
+	width: 480px;
+	text-align: right;
+	float: left;
+}
+
+#the-text { 
+	width: 948px;
+	height: 600px;
+	font: 14px "Andale Mono", "Courier New", monospace;
+	border: 4px solid #000;
+	color: #000;
+	background: #fff;
+	padding: 6px;
+	margin: 10px auto;
+}
+
+#the-text.paused { 
+	background: #ddd;
+	border: 4px solid #bbb;
+	color: #999;
+}
+
+#the-text.done { 
+	background: lightgreen;
+	border: 4px solid darkgreen;
+	color: darkgreen;
+}
+
+#the-text.warn { 
+	border: 4px solid #ff4500;
+	color: #ff4500;
+}
+
+#the-text.annoy-1 { 
+	border: 4px solid #b22222;
+	color: #b22222;
+}
+
+#the-text.annoy-2 { 
+	border: 4px solid #f00;
+	color: #f00;
+}
+
+#the-text.annoy-3 { 
+	border: 4px solid #000;
+	background: #f00;
+	color: #fff;
+}
+
+#html, #manuscript { 
+	position: absolute;
+	width: 800px;
+	height: 600px;
+	border: 10px solid #ccc;
+	top: 50%;
+	left: 50%;
+	margin-left: -400px;
+	margin-top: -300px;
+	background: white;
+	overflow: auto;
+	padding: 10px;
+	font-size: 150%;
+}
+
+#manuscript { 
+	font: 14px/28px "Courier New", monospace;
+}
+
+#manuscript p { 
+	text-indent: 30px;
+}
+
+span.label { 
+	font-style: italic;
+	font-weight: bold;
+	color: #666;
+}
+
+input.text { 
+	border: 1px solid #ccc;
+	padding: 3px;
+	font: 14px/28px "Courier New", monospace;
+	width: 72px;
+	margin-left: 10px;
+}
+
+#current-words, #time-elapsed { 
+	font-size: 200%;
+	font-weight: bold;
+	font-style: normal;
+	color: #000;
+	padding-left: 10px;
+}
