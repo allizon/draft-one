@@ -13,6 +13,9 @@ function reset ( ) {
 	$( '#the-text' ).removeClass( 'paused' );
 }
 
+// I'd like to animate these transitions from one state to the next
+// rather than have them just immediately change color.
+
 function warn ( ) {
 	reset( );
 	$( '#the-text' ).addClass( 'warn' );
