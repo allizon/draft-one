@@ -15,6 +15,8 @@ function reset ( ) {
 
 // I'd like to animate these transitions from one state to the next
 // rather than have them just immediately change color.
+//
+// Also, can we make this more object-oriented?
 
 function warn ( ) {
 	reset( );
@@ -93,7 +95,21 @@ function updater ( ) {
 }
 
 $( function ( ) {
+
+    $( 'section#settings h3' ).click( function ( ) { 
+        $( 'section#settings p' ).slideToggle( );
+    } );
+
+    $( '#action-buttons a' ).click( function ( ) { 
+        $( '#action-buttons a' ).removeClass( 'active' );
+        $( this ).addClass( 'active' );
+    } );
+
 	$( '#start' ).click( function ( ) {
+        if ( paused ) { 
+            pause( ); // unpauses - make unpause() function
+        }
+
 		interval_id = setInterval( updater, 1000 );
 		$( '#the-text' ).removeClass( 'paused' ).attr( 'disabled', false );
 	} );

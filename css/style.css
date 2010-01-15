@@ -11,11 +11,16 @@
     src: local('GreatLakesNF Regular'), local('GreatLakesNF'), url('../GREALN__.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'AniversRegular';
+    src: url('Anivers_Regular.otf');
+    src: local('Anivers Regular'), local('AniversRegular'), url('../Anivers_Regular.otf') format('truetype');
+}
+
 body { 
     margin: 0;
     padding; 0;
-    font-size: 62.5%;
-    font-family: Arial, sans-serif;
+    font: 62.5% 'AniversRegular', Arial, sans-serif;
 }
 
 header, section, nav { 
@@ -24,14 +29,27 @@ header, section, nav {
 
 header { 
     width: 960px;
-    margin: 0 auto;
+    margin: 0 auto 10px;
+    border-bottom: 1px solid #444;
+    position: relative;
 }
 
     header h1 { 
-        font: 72px 'GreatLakesNF', Arial, sans-serif;
+        font: 72px 'AniversRegular', Arial, sans-serif;
         color: #444;
         padding: 0;
-		margin: 0;
+        margin: 0;
+        width: 476px;
+        float: left;
+    }
+
+    header #action-buttons { 
+        position: absolute;
+        float: left;
+        text-align: right;
+        width: 476px;
+        bottom: 10px;
+        right: 10px;
     }
 
 .container { 
@@ -42,14 +60,71 @@ header {
 }
 
 .leftcol { 
-    width: 480px;
+    width: 476px;
     float: left;
 }
 
 .rightcol { 
-    width: 480px;
+    width: 476px;
     text-align: right;
     float: left;
+}
+
+.clear { 
+    clear: both;
+}
+
+a.rounded-button { 
+    font-size: 14px;
+    background: #aaa;
+    color: #000;
+    border: 1px solid #000;
+    padding: 3px 6px;
+    margin-left: 6px;
+    cursor: pointer;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+    a.rounded-button:hover { 
+        background: #ccc;
+        color: #fff;
+    }
+
+    a.rounded-button.active { 
+        background: #fff;
+        color: #666;
+        border: 1px solid #666;
+    }
+
+
+section#settings p { 
+    display: none;
+}
+
+section#settings h3 { 
+    font: 24px 'AniversRegular', Arial, sans-serif;
+    color: #444;
+    padding: 0;
+    margin: 0 10px 0 0;
+    text-align: right;
+    cursor: pointer;
+}
+
+#settings h3.hover { 
+    color: #f00;
+}
+
+section#stats { 
+    text-align: center;
+}
+
+    section#stats span:first-of-type { 
+        margin-right: 20px;
+    }
+
+#textbox { 
+
 }
 
 #the-text { 
@@ -120,8 +195,7 @@ header {
 }
 
 span.label { 
-    font-style: italic;
-    font-weight: bold;
+    font: 14px "AniversRegular", Arial, sans-serif;
     color: #666;
 }
 
