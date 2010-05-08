@@ -129,22 +129,22 @@ $( function ( ) {
 	} );
 
 	$( '#the-text' ).keydown( function ( e ) {
-		var which = e.keyCode ? e.keyCode : e.which;
-
-		switch ( which )
-		{
-			case 8:
-				return false;
-			case 27:
-				pause( );
-				break;
-		}
-			
-		if ( !paused && !is_done )
-		{
-			reset( );
-			time_not_typing = 0;
-		}
+// 		var which = e.keyCode ? e.keyCode : e.which;
+// 
+// 		switch ( which )
+// 		{
+// 			case 8:
+// 				return false;
+// 			case 27:
+// 				pause( );
+// 				break;
+// 		}
+// 			
+// 		if ( !paused && !is_done )
+// 		{
+// 			reset( );
+// 			time_not_typing = 0;
+// 		}
 	} );
 
 	$( '#export-as-html' ).click( function ( ) {

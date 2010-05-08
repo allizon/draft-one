@@ -49,6 +49,8 @@
 		<textarea id="the-text" class="paused" disabled="true"></textarea>
         <p>
             <a href="javascript:;" id="export-as-html">Export as HTML</a>
+            |
+            <a href="javascript:;" id="export-as-text">Export as Text</a>
         </p>
 	</section>
 
