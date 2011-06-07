@@ -6,7 +6,7 @@
 
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script type="text/javascript">
-        google.load( "jquery", "1.4" );
+        google.load( "jquery", "1.6" );
     </script>
     <script type="text/javascript" src="js/showdown.js"></script>
     <script type="text/javascript" src="js/behaviors.js"></script>
