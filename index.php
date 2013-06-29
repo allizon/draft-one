@@ -120,7 +120,8 @@
 		</p>
 		<p class="right">
 			&copy; 2012 Allen Holt. Follow me on <a href="http://twitter.com/allenholt/" target="_blank">Twitter</a> if you feel like it.<br />
-			Got feedback, comments or bug reports? <a href="mailto:ajholt@gmail.com?Subject=DraftOne">Send 'em my way.</a>
+			Got feedback, comments or bug reports? <a href="mailto:ajholt@gmail.com?Subject=DraftOne">Send 'em my way.</a><br />
+			You can check out this project on <a href="https://github.com/mr-terrific/draft-one" target="_blank">GitHub</a> if that's the kind of thing you're into.
 		</p>
 	</section>
 </footer>
