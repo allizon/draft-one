@@ -1,7 +1,11 @@
 jQuery.fn.center = function ( ) {
-    this.css( "position", "absolute" );
-    this.css( "top", Math.max( 0, ( ( $(window).height() - this.outerHeight() ) / 2 ) + $(window).scrollTop() ) + "px" );
-    this.css( "left", Math.max( 0, ( ( $(window).width() - this.outerWidth() ) / 2 ) + $(window).scrollLeft() ) + "px" );
+	// TODO: This isn't positioning correctly
+	this.position( {
+		my: 'top+200 center',
+		at: 'top center',
+		of: '#header',
+		collision: 'fit fit'
+	} );
     return this;
 }
 
@@ -169,7 +173,7 @@ $( function ( ) {
 		localStorage["hide_about"] = "true";
 	} );
 
-	$( '.close button' ).live( 'click', function ( ) {
+	$( document ).on( 'click', 'section#close button.close', function ( ) {
 		$( '#html, #manuscript' ).hide( );
 	} );
 
@@ -213,20 +217,29 @@ $( function ( ) {
 		$( this ).addClass( 'active' );
 	} );
 
+	// TODO: Combine the following two click functions into one
 	$( '#export-as-text' ).click( function ( ) {
 		var converter = new Showdown.converter( );
 		$( '#html' ).center( ).html( converter.makeHtml( $( '#the-text' ).val( ) ) ).removeClass( 'monospace' );
+		var text = $( '#html' ).text( );
 		$close = $( '#close-template' ).clone( ).show( ).attr( 'id', 'close' );
 		$( '#html' ).prepend( $close );
 		$( '#html' ).show( );
+
+		var clip = new ZeroClipboard( $( 'button#copy' ) );
+		clip.setText( text );
 	} );
 
 	$( '#export-as-html' ).click( function ( ) {
 		var converter = new Showdown.converter( );
 		$( '#html' ).center( ).text( converter.makeHtml( $( '#the-text' ).val( ) ) ).addClass( 'monospace' );
+		var text = $( '#html' ).text( );
 		$close = $( '#close-template' ).clone( ).show( ).attr( 'id', 'close' );
 		$( '#html' ).prepend( $close );
 		$( '#html' ).show( );
+
+		var clip = new ZeroClipboard( $( 'button#copy' ) );
+		clip.setText( text );
 	} );
 
 	if ( Modernizr.localstorage ) {
@@ -250,4 +263,10 @@ $( function ( ) {
 		$( '#number-of-minutes' ).val( 10 );
 		$( '#disable-backspace' ).prop( 'checked', false );
 	}
+
+	var clip = new ZeroClipboard( $( 'button#copy' ) );
+
+	clip.on( 'wrongflash', function ( client, args ) {
+		console.log( 'falsh is too old ' + args.flashVersion );
+	} );
 } );

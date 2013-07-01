@@ -1,11 +1,15 @@
+<?php
+$ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
+?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>DraftOne | Get your first draft out of your head!</title>
-	<link rel="stylesheet/less" type="text/css" href="css/style.less" />
+	<link rel="stylesheet/less" type="text/css" href="css/style.less?ts=<?= time() ?>" />
 
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
 	<link href='http://fonts.googleapis.com/css?family=Coda:400,800' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
@@ -15,7 +19,9 @@
 	<script type="text/javascript" src="js/modernizr.js"></script>
 	<script type="text/javascript" src="js/underscore-min.js"></script>
 	<script type="text/javascript" src="js/backbone-min.js"></script>
+	<script type="text/javascript" src="js/ZeroClipboard.min.js"></script>
 	<script type="text/javascript" src="js/onward.js"></script>
+<?php if ( $ENV == 'prod' ): ?>
 	<script type="text/javascript">
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-273478-15']);
@@ -27,11 +33,12 @@
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 		})();
 	</script>
+<?php endif; ?>
 </head>
 
 <body>
 
-<header title="Click the header to minimize it for more writing space!">
+<header id="header" title="Click the header to minimize it for more writing space!">
 	<h1>
 		DraftOne
 		<p>Keeping your writing feet<br>to the metaphorical fire.</p>
@@ -97,12 +104,16 @@
 		<p class="left">
 			The editor allows <a href="http://daringfireball.net/projects/markdown/">Markdown formatting</a> if that's your thing.
 			|
-			<a href="javascript:;" id="export-as-text">Export as Formatted Text</a>
+			<a href="javascript:;" data-clipboard-target="html" id="export-as-text">Export as Formatted Text</a>
 			|
-			<a href="javascript:;" id="export-as-html">Export as Raw HTML</a>
+			<a href="javascript:;" data-clipboard-target="html" id="export-as-html">Export as Raw HTML</a>
 			<br>
 		</p>
 	</section>
+</section>
+
+<section id="drawer" style="display:none;">
+	the copied text should go here...
 </section>
 
 <section id="goal-complete" style="display:none;">
@@ -145,8 +156,12 @@
 	</p>
 </section>
 
+<input type="hidden" id="export" value="text to coyp" />
 <section id="html" style="display:none;"></section>
-<section id="close-template" class="close" style="display:none;"><button class="rounded">Close</button></section>
+<section id="close-template" class="close" style="display:none;">
+	<button class="rounded copy" id="copy">Copy to Clipboard</button>
+	<button class="rounded close">Close</button>
+</section>
 
 </body>
 </html>
