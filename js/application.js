@@ -6,7 +6,7 @@ jQuery.fn.center = function ( ) {
 		of: '#header',
 		collision: 'fit fit'
 	} );
-    return this;
+  return this;
 }
 
 $( function ( ) {

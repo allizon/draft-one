@@ -5,6 +5,7 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 <html lang="en-us">
 <head>
 	<title>DraftOne | Get your first draft out of your head!</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.min.css" />
 	<link rel="stylesheet/less" type="text/css" href="css/style.less?ts=<?= time() ?>" />
 
@@ -24,7 +25,7 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 	<script type="text/javascript" src="js/underscore-min.js"></script>
 	<script type="text/javascript" src="js/backbone-min.js"></script>
 	<script type="text/javascript" src="js/ZeroClipboard.min.js"></script>
-	<script type="text/javascript" src="js/onward.js"></script>
+	<script type="text/javascript" src="js/application.js"></script>
 <?php if ( $ENV == 'prod' ): ?>
 	<script type="text/javascript">
 		var _gaq = _gaq || [];
@@ -43,10 +44,10 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 <body>
 
 	<header id="header" title="Click the header to minimize it for more writing space!">
-		<div class="container centered">
+		<div class="container centered relative">
 			<div class="row">
 				<div class="span8"><h1>DraftOne</h1></div>
-				<div class="span4 relative">
+				<div class="span4">
 					<div class="subhead">
 						Keeping your writing feet<br>to the metaphorical fire.</div>
 					</div>
@@ -62,41 +63,50 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 		</div>
 	</section>
 
-	<section id="about" class="row">
-		<div class="span12">
-			<h2><a id="open-about">Hey, so just what is this "DraftOne" thing, anyway? &raquo;</a></h2>
-			<p class="column">
-				Designed specifically to make you just keep moving forward when working
-				on <a href="http://nanowrimo.org" target="_blank">National Novel Writing Month</a>
-				&mdash; though you can use it any time, of course &mdash;
-				<strong>DraftOne</strong> gives you a quiet space in which to write but gently hassles you if
-				your fingers stop typing.
-				<br /><br />
-				DraftOne was inspired by <a href="http://writeordie.com/#Web+App" target="_blank">Dr. Wicked's Write or Die!</a>,
-				which helped me out tremendously during NaNoWriMo 2008.
-				I owe him a debt of gratitude for helping me get that thing done, and I hope that DraftOne can help you
-				get your own projects finished!
-			</p>
-			<p class="column">
-				Under the <strong>Settings</strong> menu, you can set a goal for yourself &mdash; either a target number of minutes or number of
-				words. Once you hit that goal, <strong>DraftOne</strong> will happily let you know that you've succeeded!
-				And if you need the extra help, you can even <em>turn off the backspace key</em> so that you have no choice
-				but to keep moving ahead.
-			</p>
-			<p class="clear center emphasis">
-				It's not about perfection &mdash; it's about getting that first draft <em>done</em>.
-			</p>
-			<p class="clear center">
-				<a id="close-about" href="#">Got it! Thanks! Now LET ME WRITE!</a>
-			</p>
+	<section id="about">
+		<div class="container">
+			<div class="row">
+					<h2><a id="open-about">Hey, so just what is this "DraftOne" thing, anyway? &raquo;</a></h2>
+			</div>
+			<div class="row pushdown">
+				<div class="span4 offset2">
+					Designed specifically to make you just keep moving forward when working
+					on <a href="http://nanowrimo.org" target="_blank">National Novel Writing Month</a>
+					&mdash; though you can use it any time, of course &mdash;
+					<strong>DraftOne</strong> gives you a quiet space in which to write but gently hassles you if
+					your fingers stop typing.
+					<br /><br />
+					DraftOne was inspired by <a href="http://writeordie.com/#Web+App" target="_blank">Dr. Wicked's Write or Die!</a>,
+					which helped me out tremendously during NaNoWriMo 2008.
+					I owe him a debt of gratitude for helping me get that thing done, and I hope that DraftOne can help you
+					get your own projects finished!
+				</div>
+				<div class="span4">
+						Under the <strong>Settings</strong> menu, you can set a goal for yourself &mdash; either a target number of minutes or number of
+						words. Once you hit that goal, <strong>DraftOne</strong> will happily let you know that you've succeeded!
+						And if you need the extra help, you can even <em>turn off the backspace key</em> so that you have no choice
+						but to keep moving ahead.
+				</div>
+				<div class="span2">&nbsp;</div>
+			</div>
+			<div class="row pushdown">
+				<div class="span8 offset2">
+					<p class="center emphasis">
+						It's not about perfection &mdash; it's about getting that first draft <em>done</em>.
+					</p>
+					<p class="clear center">
+						<a id="close-about" href="#">Got it! Thanks! Now LET ME WRITE!</a>
+					</p>
+				</div>
+			</div>
 		</div>
 	</section>
 
 	<section class="app container-v1 clear">
 		<div class="row">
 			<div id="stats" class="span12">
-				<span class="label">Current word count: <span id="current-words">0</span></span>
-				<span class="label">Time elapsed: <span id="time-elapsed">0:00</span></span>
+				<span>Current word count: <span id="current-words">0</span></span>
+				<span>Time elapsed: <span id="time-elapsed">0:00</span></span>
 			</div>
 		</div>
 
@@ -104,12 +114,12 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 			<section id="textbox" class="clearfix span12">
 				<section id="action-buttons">
 					<div class="leftcol">
-						<button id="start" class="rounded">Go!</button>
-						<button id="pause" class="rounded">Pause</button>
-						<button id="start-over" class="rounded">Start Over</button>
+						<button id="start" class="btn btn-success">Go!</button>
+						<button id="pause" class="btn">Pause</button>
+						<button id="start-over" class="btn">Start Over</button>
 					</div>
 					<div class="rightcol">
-						<button id="settings" class="hoverable rounded">Settings</button>
+						<button id="settings" class="btn">Settings</button>
 					</div>
 				</section>
 
@@ -139,16 +149,20 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 		<button id="start-new-session" class="rounded">Start New Session</button -->
 	</section>
 
-	<footer class="row">
-		<section class="container-v1 span12">
-			<p class="left">
-			</p>
-			<p class="right">
-				&copy; 2012 Allen Holt. Follow me on <a href="http://twitter.com/allenholt/" target="_blank">Twitter</a> if you feel like it.<br />
-				Got feedback, comments or bug reports? <a href="mailto:ajholt@gmail.com?Subject=DraftOne">Send 'em my way.</a><br />
-				You can check out this project on <a href="https://github.com/mr-terrific/draft-one" target="_blank">GitHub</a> if that's the kind of thing you're into.
-			</p>
-		</section>
+	<footer id="footer">
+		<div class="container centered">
+			<div class="row">
+				<div class="span6">
+					<p>&copy; 2012 Allen Holt. Follow me on <a href="http://twitter.com/allenholt/" target="_blank">Twitter</a> if you feel like it.</p>
+				</div>
+				<div class="span6">
+					<p class="right">
+						Got feedback, comments or bug reports? <a href="mailto:ajholt@gmail.com?Subject=DraftOne">Send 'em my way.</a><br />
+						You can check out this project on <a href="https://github.com/mr-terrific/draft-one" target="_blank">GitHub</a> if that's the kind of thing you're into.
+					</p>
+				</div>
+			</div>
+		</div>
 	</footer>
 
 <section id="settings">
