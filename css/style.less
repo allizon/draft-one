@@ -10,7 +10,7 @@ body {
     background: @off_white;
     margin: 0;
     padding: 0;
-    font: 62.5% 'Open Sans', Arial, sans-serif;
+    font: 100% 'Open Sans', Helvetica, Arial, sans-serif;
 
     &.convert {
         margin: 0;
@@ -48,24 +48,25 @@ header {
 
     h1 {
         width: 960px;
-        font: 800 96px 'Coda', Arial, sans-serif;
+        font: 800 96px 'Sonsie One', Arial, sans-serif;
         padding: 10px 0;
         margin: 0 auto;
         position: relative;
         color: @off_white;
         text-shadow: 3px 3px @dark_blue;
+    }
 
-        p {
-            position: absolute;
-            text-align: right;
-            bottom: 20px;
-            right: 0;
-            width: 500px;
-            font: normal 20px 'Coda', Arial, sans-serif;
-            letter-spacing: .1em;
-            margin: 0;
-            padding: 8px 0;
-        }
+    .subhead {
+        position: absolute;
+        bottom: 20px;
+        right: 0;
+        text-align: right;
+        vertical-align: bottom;
+        font: 800 20px 'Open Sans', Arial, sans-serif;
+        letter-spacing: .1em;
+        margin: 0;
+        padding: 8px 0;
+        z-index: 10;
     }
 
     .hide {
@@ -102,7 +103,7 @@ footer {
     border-bottom: 2px solid @dark_blue;
     margin: 0 auto;
     padding: 0;
-    font: 800 20px 'Coda', Arial, sans-serif;
+    font: 800 20px 'Sonsie One', Arial, sans-serif;
     color: @off_white;
     text-shadow: 1px 1px @dark_blue;
     cursor: pointer;
@@ -119,7 +120,7 @@ footer {
     padding: 10px;
 
     h3 {
-        font: 800 36px 'Coda', Arial, sans-serif;
+        font: 800 36px 'Open Sans', Arial, sans-serif;
         margin: 0;
     }
 
@@ -128,7 +129,7 @@ footer {
         font-weight: bold;
 
         &.emphasis {
-            font: 20px 'Coda', Arial, sans-serif;
+            font: 20px 'Open Sans', Arial, sans-serif;
             color: @yellow;
         }
     }
@@ -162,7 +163,7 @@ footer {
     h2 {
         margin: 0;
         text-align: center;
-        font: bold 18px 'Coda', Arial, sans-serif;
+        font: bold 18px 'Open Sans', Arial, sans-serif;
     }
 
     section {
@@ -197,11 +198,19 @@ footer {
     padding: 0;
 }
 
-.container {
+.container-v1 {
     width: 960px;
     margin: 10px auto;
     position: relative;
     font-size: 120%;
+}
+
+.container.centered {
+    margin: 0 auto;
+}
+
+.relative {
+    position: relative;
 }
 
 .leftcol {
@@ -282,7 +291,7 @@ section#settings {
     padding: 10px;
 
     h3 {
-        font: 800 24px 'Coda', Arial, sans-serif;
+        font: 800 24px 'Open Sans', Arial, sans-serif;
         color: #444;
         padding: 0;
         margin: 0 10px 0 0;

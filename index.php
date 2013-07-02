@@ -2,18 +2,22 @@
 $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
 <head>
 	<title>DraftOne | Get your first draft out of your head!</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.min.css" />
 	<link rel="stylesheet/less" type="text/css" href="css/style.less?ts=<?= time() ?>" />
 
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
-	<link href='http://fonts.googleapis.com/css?family=Coda:400,800' rel='stylesheet' type='text/css'>
+
+	<link href='http://fonts.googleapis.com/css?family=Sonsie+One' rel='stylesheet' type='text/css'>
+ 	<link href='http://fonts.googleapis.com/css?family=Coda:400,800' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
 
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/less.min.js"></script>
 	<script type="text/javascript" src="js/showdown.js"></script>
 	<script type="text/javascript" src="js/modernizr.js"></script>
@@ -38,104 +42,114 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 
 <body>
 
-<header id="header" title="Click the header to minimize it for more writing space!">
-	<h1>
-		DraftOne
-		<p>Keeping your writing feet<br>to the metaphorical fire.</p>
-	</h1>
-	<section class="clear"></section>
-</header>
-
-<section id="header-smaller">
-	<section class="container">
-		DraftOne
-	</section>
-</section>
-
-<section id="about">
-	<section class="container">
-		<h2><a id="open-about">Hey, so just what is this "DraftOne" thing, anyway? &raquo;</a></h2>
-		<p class="column">
-			Designed specifically to make you just keep moving forward when working
-			on <a href="http://nanowrimo.org" target="_blank">National Novel Writing Month</a>
-			&mdash; though you can use it any time, of course &mdash;
-			<strong>DraftOne</strong> gives you a quiet space in which to write but gently hassles you if
-			your fingers stop typing.
-			<br /><br />
-			DraftOne was inspired by <a href="http://writeordie.com/#Web+App" target="_blank">Dr. Wicked's Write or Die!</a>,
-			which helped me out tremendously during NaNoWriMo 2008.
-			I owe him a debt of gratitude for helping me get that thing done, and I hope that DraftOne can help you
-			get your own projects finished!
-		</p>
-		<p class="column">
-			Under the <strong>Settings</strong> menu, you can set a goal for yourself &mdash; either a target number of minutes or number of
-			words. Once you hit that goal, <strong>DraftOne</strong> will happily let you know that you've succeeded!
-			And if you need the extra help, you can even <em>turn off the backspace key</em> so that you have no choice
-			but to keep moving ahead.
-		</p>
-		<p class="clear center emphasis">
-			It's not about perfection &mdash; it's about getting that first draft <em>done</em>.
-		</p>
-		<p class="clear center">
-			<a id="close-about" href="#">Got it! Thanks! Now LET ME WRITE!</a>
-		</p>
-	</section>
-</section>
-
-<section class="app container clear">
-	<section id="stats">
-		<span class="label">Current word count: <span id="current-words">0</span></span>
-		<span class="label">Time elapsed: <span id="time-elapsed">0:00</span></span>
-	</section>
-
-	<section id="textbox" class="clearfix">
-		<section id="action-buttons">
-			<div class="leftcol">
-				<button id="start" class="rounded">Go!</button>
-				<button id="pause" class="rounded">Pause</button>
-				<button id="start-over" class="rounded">Start Over</button>
+	<header id="header" title="Click the header to minimize it for more writing space!">
+		<div class="container centered">
+			<div class="row">
+				<div class="span8"><h1>DraftOne</h1></div>
+				<div class="span4 relative">
+					<div class="subhead">
+						Keeping your writing feet<br>to the metaphorical fire.</div>
+					</div>
 			</div>
-			<div class="rightcol">
-				<button id="settings" class="hoverable rounded">Settings</button>
+		</div>
+	</header>
+
+	<section id="header-smaller">
+		<div class="container">
+			<div class="row">
+				<div class="span12">DraftOne</div>
 			</div>
+		</div>
+	</section>
+
+	<section id="about" class="row">
+		<div class="span12">
+			<h2><a id="open-about">Hey, so just what is this "DraftOne" thing, anyway? &raquo;</a></h2>
+			<p class="column">
+				Designed specifically to make you just keep moving forward when working
+				on <a href="http://nanowrimo.org" target="_blank">National Novel Writing Month</a>
+				&mdash; though you can use it any time, of course &mdash;
+				<strong>DraftOne</strong> gives you a quiet space in which to write but gently hassles you if
+				your fingers stop typing.
+				<br /><br />
+				DraftOne was inspired by <a href="http://writeordie.com/#Web+App" target="_blank">Dr. Wicked's Write or Die!</a>,
+				which helped me out tremendously during NaNoWriMo 2008.
+				I owe him a debt of gratitude for helping me get that thing done, and I hope that DraftOne can help you
+				get your own projects finished!
+			</p>
+			<p class="column">
+				Under the <strong>Settings</strong> menu, you can set a goal for yourself &mdash; either a target number of minutes or number of
+				words. Once you hit that goal, <strong>DraftOne</strong> will happily let you know that you've succeeded!
+				And if you need the extra help, you can even <em>turn off the backspace key</em> so that you have no choice
+				but to keep moving ahead.
+			</p>
+			<p class="clear center emphasis">
+				It's not about perfection &mdash; it's about getting that first draft <em>done</em>.
+			</p>
+			<p class="clear center">
+				<a id="close-about" href="#">Got it! Thanks! Now LET ME WRITE!</a>
+			</p>
+		</div>
+	</section>
+
+	<section class="app container-v1 clear">
+		<div class="row">
+			<div id="stats" class="span12">
+				<span class="label">Current word count: <span id="current-words">0</span></span>
+				<span class="label">Time elapsed: <span id="time-elapsed">0:00</span></span>
+			</div>
+		</div>
+
+		<div class="row">
+			<section id="textbox" class="clearfix span12">
+				<section id="action-buttons">
+					<div class="leftcol">
+						<button id="start" class="rounded">Go!</button>
+						<button id="pause" class="rounded">Pause</button>
+						<button id="start-over" class="rounded">Start Over</button>
+					</div>
+					<div class="rightcol">
+						<button id="settings" class="hoverable rounded">Settings</button>
+					</div>
+				</section>
+
+				<textarea id="the-text" class="paused" disabled="true"></textarea>
+				<p class="left">
+					The editor allows <a href="http://daringfireball.net/projects/markdown/">Markdown formatting</a> if that's your thing.
+					|
+					<a href="javascript:;" data-clipboard-target="html" id="export-as-text">Export as Formatted Text</a>
+					|
+					<a href="javascript:;" data-clipboard-target="html" id="export-as-html">Export as Raw HTML</a>
+					<br>
+				</p>
+			</section>
+		</div>
+	</section>
+
+	<section id="drawer" style="display:none;">
+		the copied text should go here...
+	</section>
+
+	<section id="goal-complete" style="display:none;">
+		<h3>Congratulations!</h3>
+		<p>You hit your goal! Well done, you!</p>
+		<button id="continue" class="rounded">Continue This Session</button>
+		<p class="emphasis">Remember to save your work<br />to a word processor or text editor!</p>
+		<!-- br />
+		<button id="start-new-session" class="rounded">Start New Session</button -->
+	</section>
+
+	<footer class="row">
+		<section class="container-v1 span12">
+			<p class="left">
+			</p>
+			<p class="right">
+				&copy; 2012 Allen Holt. Follow me on <a href="http://twitter.com/allenholt/" target="_blank">Twitter</a> if you feel like it.<br />
+				Got feedback, comments or bug reports? <a href="mailto:ajholt@gmail.com?Subject=DraftOne">Send 'em my way.</a><br />
+				You can check out this project on <a href="https://github.com/mr-terrific/draft-one" target="_blank">GitHub</a> if that's the kind of thing you're into.
+			</p>
 		</section>
-
-		<textarea id="the-text" class="paused" disabled="true"></textarea>
-		<p class="left">
-			The editor allows <a href="http://daringfireball.net/projects/markdown/">Markdown formatting</a> if that's your thing.
-			|
-			<a href="javascript:;" data-clipboard-target="html" id="export-as-text">Export as Formatted Text</a>
-			|
-			<a href="javascript:;" data-clipboard-target="html" id="export-as-html">Export as Raw HTML</a>
-			<br>
-		</p>
-	</section>
-</section>
-
-<section id="drawer" style="display:none;">
-	the copied text should go here...
-</section>
-
-<section id="goal-complete" style="display:none;">
-	<h3>Congratulations!</h3>
-	<p>You hit your goal! Well done, you!</p>
-	<button id="continue" class="rounded">Continue This Session</button>
-	<p class="emphasis">Remember to save your work<br />to a word processor or text editor!</p>
-	<!-- br />
-	<button id="start-new-session" class="rounded">Start New Session</button -->
-</section>
-
-<footer>
-	<section class="container">
-		<p class="left">
-		</p>
-		<p class="right">
-			&copy; 2012 Allen Holt. Follow me on <a href="http://twitter.com/allenholt/" target="_blank">Twitter</a> if you feel like it.<br />
-			Got feedback, comments or bug reports? <a href="mailto:ajholt@gmail.com?Subject=DraftOne">Send 'em my way.</a><br />
-			You can check out this project on <a href="https://github.com/mr-terrific/draft-one" target="_blank">GitHub</a> if that's the kind of thing you're into.
-		</p>
-	</section>
-</footer>
+	</footer>
 
 <section id="settings">
 	<h3>Settings</h3>
