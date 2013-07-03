@@ -56,7 +56,7 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 	</header>
 
 	<section id="header-smaller">
-		<div class="container">
+		<div class="container centered">
 			<div class="row">
 				<div class="span12">DraftOne</div>
 			</div>
@@ -66,7 +66,7 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 	<section id="about">
 		<div class="container">
 			<div class="row">
-					<h2><a id="open-about">Hey, so just what is this "DraftOne" thing, anyway? &raquo;</a></h2>
+				<h2><a id="open-about">Hey, so just what is this "DraftOne" thing, anyway? &raquo;</a></h2>
 			</div>
 			<div class="row pushdown">
 				<div class="span4 offset2">
@@ -102,37 +102,40 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 		</div>
 	</section>
 
-	<section class="app container-v1 clear">
-		<div class="row">
-			<div id="stats" class="span12">
-				<span>Current word count: <span id="current-words">0</span></span>
-				<span>Time elapsed: <span id="time-elapsed">0:00</span></span>
+	<section id="app" class="app">
+		<div class="container">
+			<div class="row center">
+				<div id="stats" class="span8 offset2">
+					<span>Current word count: <span id="current-words">0</span></span>
+					<span>Time elapsed: <span id="time-elapsed">0:00</span></span>
+				</div>
 			</div>
-		</div>
 
-		<div class="row">
-			<section id="textbox" class="clearfix span12">
-				<section id="action-buttons">
-					<div class="leftcol">
-						<button id="start" class="btn btn-success">Go!</button>
-						<button id="pause" class="btn">Pause</button>
-						<button id="start-over" class="btn">Start Over</button>
-					</div>
-					<div class="rightcol">
-						<button id="settings" class="btn">Settings</button>
-					</div>
-				</section>
+			<div class="row">
+        <div class="span4 offset2">
+          <button id="start" class="btn btn-success">Go!</button>
+          <button id="pause" class="btn">Pause</button>
+          <button id="start-over" class="btn">Start Over</button>
+        </div>
+        <div class="span4">
+          <button id="settings" class="btn right">Settings</button>
+        </div>
+        <div class="span2">&nbsp;</div>
+      </div>
 
-				<textarea id="the-text" class="paused" disabled="true"></textarea>
-				<p class="left">
-					The editor allows <a href="http://daringfireball.net/projects/markdown/">Markdown formatting</a> if that's your thing.
-					|
-					<a href="javascript:;" data-clipboard-target="html" id="export-as-text">Export as Formatted Text</a>
-					|
-					<a href="javascript:;" data-clipboard-target="html" id="export-as-html">Export as Raw HTML</a>
-					<br>
-				</p>
-			</section>
+      <div class="row">
+				<div id="textbox" class="span12 center">
+          <textarea id="the-text" class="paused" disabled="true"></textarea>
+          <p>
+            The editor allows <a href="http://daringfireball.net/projects/markdown/">Markdown formatting</a> if that's your thing.
+            |
+            <a href="javascript:;" data-clipboard-target="html" id="export-as-text">Export as Formatted Text</a>
+            |
+            <a href="javascript:;" data-clipboard-target="html" id="export-as-html">Export as Raw HTML</a>
+            <br>
+          </p>
+				</div>
+			</div>
 		</div>
 	</section>
 
@@ -180,7 +183,7 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 	</p>
 
 	<p>
-		<button id="save-settings">Save and Close</button>
+		<button id="save-settings" class="btn btn-success">Save and Close</button>
 	</p>
 </section>
 

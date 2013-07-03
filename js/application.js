@@ -160,7 +160,12 @@ $( function ( ) {
 
 	// ALl of these functiosn should get moved into the EditorView
 	$( 'button#settings' ).click( function ( ) {
-		$( 'section#settings' ).show( ).center( );
+		$( 'section#settings' ).show( ).position( {
+			my: 'top+200 center',
+			at: 'top center',
+			of: '#app',
+			collision: 'fit fit'
+		} );
 		editor_view.pause( );
 	} );
 
