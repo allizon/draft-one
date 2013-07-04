@@ -1,17 +1,36 @@
-jQuery.fn.center = function ( ) {
-	// TODO: This isn't positioning correctly
-	this.position( {
-		my: 'top+200 center',
-		at: 'top center',
-		of: '#header',
-		collision: 'fit fit'
+var converter = new Showdown.converter( );
+
+function zclip ( element ) {
+	var clip = new ZeroClipboard( $( element ) );
+	clip.on( 'mousedown', function ( client, args ) {
+		var raw_text = $( '#the-text ').val( );
+		var html_text = converter.makeHtml( raw_text );
+
+		if ( $( this ).attr( 'id' ) == 'export-text' ) {
+			client.setText( raw_text );
+		} else {
+			client.setText( html_text );
+		}
+
+		$( '#textbox' ).trigger( 'editor:text-copied' );
 	} );
-    return this;
+	// TODO - both of the following functions should remove the "Copy to
+	// Cliboard" buttons
+	clip.on( 'noflash', function ( client, args ) {
+		$( '#clipboard-buttons' ).hide( );
+	} );
+	clip.on( 'wrongflash', function ( client, args ) {
+		$( '#clipboard-buttons' ).hide( );
+	} );
+	return clip;
 }
 
 $( function ( ) {
+	var text_clip = zclip( '#export-text' );
+	var html_clip = zclip( '#export-html' );
+
 	var EditorView = Backbone.View.extend( {
-		el: '#textbox',
+		el: '#app',
 		textarea: $( '#the-text' ),
 		time_elapsed_label: $( '#time-elapsed' ),
 		word_count_label: $( '#current-words' ),
@@ -35,7 +54,8 @@ $( function ( ) {
 			'editor:warn'             : 'warn',
 			'editor:annoy'            : 'annoy',
 			'editor:done'             : 'done',
-			'editor:autosave'         : 'autoSave'
+			'editor:autosave'         : 'autoSave',
+			'editor:text-copied'      : 'copy_success'
 		},
 
 		render: function ( ) {
@@ -80,7 +100,10 @@ $( function ( ) {
 			this.pause( );
 			this.textarea.addClass( 'done' );
 			this.is_done = true;
-			this.goal_complete.show( ).center( );
+			$( '#success-modal' ).modal( 'show' );
+		},
+		copy_success: function ( ) {
+			$( '#text-copied-modal' ).modal( 'show' );
 		},
 		keydown: function ( e ) {
 			var which = e.keyCode ? e.keyCode : e.which;
@@ -159,13 +182,8 @@ $( function ( ) {
 	}
 
 	// ALl of these functiosn should get moved into the EditorView
-	$( 'button#settings' ).click( function ( ) {
-		$( 'section#settings' ).show( ).center( );
-		editor_view.pause( );
-	} );
-
 	$( '#open-about' ).click( function ( ) {
-		$( '#about' ).animate( { 'height': '400px' }, 500 );
+		$( '#about' ).animate( { 'height': '450px' }, 500 );
 	} );
 
 	$( '#close-about' ).click( function ( ) {
@@ -178,7 +196,7 @@ $( function ( ) {
 	} );
 
 	$( '#continue' ).click( function ( ) {
-		editor_view.goal_complete.hide( );
+		$( '#success-modal' ).modal( 'hide' );
 		editor_view.start( );
 	} );
 
@@ -210,36 +228,8 @@ $( function ( ) {
 			localStorage["disable_backspace"] = $( '#disable-backspace' ).prop( 'checked' ) ? 1 : 0;
 			editor_view.autoSave( );
 		}
-	} );
 
-	$( '#action-buttons button' ).click( function ( ) {
-		$( '#action-buttons button' ).removeClass( 'active' );
-		$( this ).addClass( 'active' );
-	} );
-
-	// TODO: Combine the following two click functions into one
-	$( '#export-as-text' ).click( function ( ) {
-		var converter = new Showdown.converter( );
-		$( '#html' ).center( ).html( converter.makeHtml( $( '#the-text' ).val( ) ) ).removeClass( 'monospace' );
-		var text = $( '#html' ).text( );
-		$close = $( '#close-template' ).clone( ).show( ).attr( 'id', 'close' );
-		$( '#html' ).prepend( $close );
-		$( '#html' ).show( );
-
-		var clip = new ZeroClipboard( $( 'button#copy' ) );
-		clip.setText( text );
-	} );
-
-	$( '#export-as-html' ).click( function ( ) {
-		var converter = new Showdown.converter( );
-		$( '#html' ).center( ).text( converter.makeHtml( $( '#the-text' ).val( ) ) ).addClass( 'monospace' );
-		var text = $( '#html' ).text( );
-		$close = $( '#close-template' ).clone( ).show( ).attr( 'id', 'close' );
-		$( '#html' ).prepend( $close );
-		$( '#html' ).show( );
-
-		var clip = new ZeroClipboard( $( 'button#copy' ) );
-		clip.setText( text );
+		$( '#settings-modal' ).modal( 'hide' );
 	} );
 
 	if ( Modernizr.localstorage ) {
@@ -263,10 +253,4 @@ $( function ( ) {
 		$( '#number-of-minutes' ).val( 10 );
 		$( '#disable-backspace' ).prop( 'checked', false );
 	}
-
-	var clip = new ZeroClipboard( $( 'button#copy' ) );
-
-	clip.on( 'wrongflash', function ( client, args ) {
-		console.log( 'falsh is too old ' + args.flashVersion );
-	} );
 } );
