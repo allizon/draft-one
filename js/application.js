@@ -11,7 +11,7 @@ jQuery.fn.center = function ( ) {
 
 $( function ( ) {
 	var EditorView = Backbone.View.extend( {
-		el: '#textbox',
+		el: '#app',
 		textarea: $( '#the-text' ),
 		time_elapsed_label: $( '#time-elapsed' ),
 		word_count_label: $( '#current-words' ),
@@ -159,18 +159,8 @@ $( function ( ) {
 	}
 
 	// ALl of these functiosn should get moved into the EditorView
-	$( 'button#settings' ).click( function ( ) {
-		$( 'section#settings' ).show( ).position( {
-			my: 'top+200 center',
-			at: 'top center',
-			of: '#app',
-			collision: 'fit fit'
-		} );
-		editor_view.pause( );
-	} );
-
 	$( '#open-about' ).click( function ( ) {
-		$( '#about' ).animate( { 'height': '400px' }, 500 );
+		$( '#about' ).animate( { 'height': '450px' }, 500 );
 	} );
 
 	$( '#close-about' ).click( function ( ) {
@@ -215,11 +205,8 @@ $( function ( ) {
 			localStorage["disable_backspace"] = $( '#disable-backspace' ).prop( 'checked' ) ? 1 : 0;
 			editor_view.autoSave( );
 		}
-	} );
 
-	$( '#action-buttons button' ).click( function ( ) {
-		$( '#action-buttons button' ).removeClass( 'active' );
-		$( this ).addClass( 'active' );
+		$( '#settings-modal' ).modal( 'hide' );
 	} );
 
 	// TODO: Combine the following two click functions into one
@@ -269,8 +256,7 @@ $( function ( ) {
 		$( '#disable-backspace' ).prop( 'checked', false );
 	}
 
-	var clip = new ZeroClipboard( $( 'button#copy' ) );
-
+	var clip = new ZeroClipboard( );
 	clip.on( 'wrongflash', function ( client, args ) {
 		console.log( 'falsh is too old ' + args.flashVersion );
 	} );

@@ -113,12 +113,12 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 
 			<div class="row">
         <div class="span4 offset2">
-          <button id="start" class="btn btn-success">Go!</button>
-          <button id="pause" class="btn">Pause</button>
-          <button id="start-over" class="btn">Start Over</button>
+          <button id="start" class="btn btn-success"><i class="icon-play"></i> Go!</button>
+          <button id="pause" class="btn"><i class="icon-pause"></i> Pause</button>
+          <button id="start-over" class="btn"><i class="icon-repeat"></i> Start Over</button>
         </div>
-        <div class="span4">
-          <button id="settings" class="btn right">Settings</button>
+        <div class="span4 text-right">
+          <a href="#settings-modal" role="button" class="btn" data-toggle="modal"><i class="icon-wrench"></i> Settings</a>
         </div>
         <div class="span2">&nbsp;</div>
       </div>
@@ -168,31 +168,64 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 		</div>
 	</footer>
 
-<section id="settings">
-	<h3>Settings</h3>
-	<p>
-		<input type="radio" name="which" id="which-number-of-words" checked="checked">
-		<span class="label">Number of words:</span> <input type="text" id="number-of-words" class="text" value="500" />
-		<br>
-		<input type="radio" name="which" id="which-number-of-minutes" />
-		<span class="label">or Number of minutes you want to write:</span> <input type="text" id="number-of-minutes" class="text" value="10">
-	</p>
-	<p>
-		<input type="checkbox" name="disable-backspace" id="disable-backspace"> <span class="label">Disable backspacing/deleting</span><br>
-		<i>Disabling backspacing certainly makes you keep going forward, but can also be annoying as hell. Fair warning.</i>
-	</p>
+	<div id="settings-modal" class="modal hide fade">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3>Settings</h3>
+		</div>
+		<div class="modal-body">
+      <form class="form-horizontal">
+        <div class="control-group">
+          <label class="control-label">
+            <input type="radio" name="which" id="which-number-of-words" checked="checked">
+            Number of words you want to write
+          </label>
+          <div class="controls">
+            <input type="text" id="number-of-words" placeholder="500" class="input-medium" />
+          </div>
+        </div>
+        <p class="text-center"><b>OR</b></p>
+        <div class="control-group">
+          <label class="control-label">
+            <input type="radio" name="which" id="which-number-of-minutes">
+            Number of minutes you want to write
+          </label>
+          <div class="controls">
+            <input type="text" id="number-of-minutes" placeholder="10" class="input-medium" />
+          </div>
+        </div>
+        <hr>
+        <label class="checkbox inline">
+          <input type="checkbox" name="disable-backspace" id="disable-backspace"> Disable backspacing/deleting
+          <div class="alert">
+            <strong>Warning!</strong> Disabling backspacing certainly makes you keep going forward, but can also be annoying as hell. Just so you know.
+          </div>
+        </label>
+      </form>
+		</div>
+		<div class="modal-footer">
+			<p>
+				<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+				<button class="btn btn-primary" id="save-settings">Save Changes</button>
+			</p>
+		</div>
+	</div>
 
-	<p>
-		<button id="save-settings" class="btn btn-success">Save and Close</button>
-	</p>
-</section>
+	<div id="settings-modal" class="modal hide fade">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3>Congratulations!</h3>
+		</div>
+		<div class="modal-body"></div>
+		<div class="modal-footer"></div>
+	</div>
 
-<input type="hidden" id="export" value="text to coyp" />
-<section id="html" style="display:none;"></section>
-<section id="close-template" class="close" style="display:none;">
-	<button class="rounded copy" id="copy">Copy to Clipboard</button>
-	<button class="rounded close">Close</button>
-</section>
+  <input type="hidden" id="export" value="text to coyp" />
+  <section id="html" style="display:none;"></section>
+  <section id="close-template" class="close" style="display:none;">
+  	<button class="rounded copy" id="copy">Copy to Clipboard</button>
+  	<button class="rounded close">Close</button>
+  </section>
 
 </body>
 </html>
