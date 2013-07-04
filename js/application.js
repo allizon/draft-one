@@ -1,24 +1,7 @@
-jQuery.fn.center = function ( ) {
-	// TODO: This isn't positioning correctly
-	this.position( {
-		my: 'top+200 center',
-		at: 'top center',
-		of: '#header',
-		collision: 'fit fit'
-	} );
-  return this;
-}
-
 var converter = new Showdown.converter( );
 
 function zclip ( element ) {
 	var clip = new ZeroClipboard( $( element ) );
-	clip.on( 'complete', function ( client, args ) {
-		console.log( 'Text copied: ' + args.text );
-	} );
-	clip.on( 'load', function ( client, args ) {
-		// console.log( 'movie loaded' );
-	} );
 	clip.on( 'mousedown', function ( client, args ) {
 		var raw_text = $( '#the-text ').val( );
 		var html_text = converter.makeHtml( raw_text );
@@ -31,11 +14,13 @@ function zclip ( element ) {
 
 		$( '#textbox' ).trigger( 'editor:text-copied' );
 	} );
+	// TODO - both of the following functions should remove the "Copy to
+	// Cliboard" buttons
 	clip.on( 'noflash', function ( client, args ) {
-		console.log( 'no falsh installed' );
+		$( '#clipboard-buttons' ).hide( );
 	} );
 	clip.on( 'wrongflash', function ( client, args ) {
-		console.log( 'falsh is too old ' + args.flashVersion );
+		$( '#clipboard-buttons' ).hide( );
 	} );
 	return clip;
 }
@@ -115,7 +100,7 @@ $( function ( ) {
 			this.pause( );
 			this.textarea.addClass( 'done' );
 			this.is_done = true;
-			this.goal_complete.show( ).center( );
+			$( '#success-modal' ).modal( 'show' );
 		},
 		copy_success: function ( ) {
 			$( '#text-copied-modal' ).modal( 'show' );
@@ -211,7 +196,7 @@ $( function ( ) {
 	} );
 
 	$( '#continue' ).click( function ( ) {
-		editor_view.goal_complete.hide( );
+		$( '#success-modal' ).modal( 'hide' );
 		editor_view.start( );
 	} );
 

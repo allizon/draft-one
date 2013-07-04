@@ -111,7 +111,7 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
         </div>
         <div class="span4 text-right">
           <a href="#settings-modal" class="btn" data-toggle="modal"><i class="icon-wrench"></i> Settings</a>
-          <div class="btn-group">
+          <div class="btn-group" id="clipboard-buttons">
             <a role="button" class="btn dropdown-toggle" data-toggle="dropdown" id="clipboard-menu"><i class="icon-download-alt"></i> Copy to Clipboard</a>
             <ul class="dropdown-menu text-left">
               <li><a id="export-text" class="clipboard" data-clipboard-text="">As plain text</a></li>
@@ -142,15 +142,6 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 				</div>
 			</div>
 		</div>
-	</section>
-
-	<section id="goal-complete" style="display:none;">
-		<h3>Congratulations!</h3>
-		<p>You hit your goal! Well done, you!</p>
-		<button id="continue" class="rounded">Continue This Session</button>
-		<p class="emphasis">Remember to save your work<br />to a word processor or text editor!</p>
-		<!-- br />
-		<button id="start-new-session" class="rounded">Start New Session</button -->
 	</section>
 
 	<footer id="footer">
@@ -207,19 +198,26 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
       </form>
 		</div>
 		<div class="modal-footer">
-			<p>
-				<button class="btn btn-primary" id="save-settings">Save Changes</button>
-			</p>
+			<button class="btn btn-primary" id="save-settings">Save Changes</button>
 		</div>
 	</div>
 
-	<div id="settings-modal" class="modal hide fade">
+	<div id="success-modal" class="modal hide fade">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			<h3>Congratulations!</h3>
 		</div>
-		<div class="modal-body"></div>
-		<div class="modal-footer"></div>
+		<div class="modal-body">
+      <p>You hit your goal! Well done, you!</p>
+      <p class="emphasis">
+        Remember to save your work to a word processor or text editor! You can use the "Copy to Clipboard" button
+        to grab all of your text, either just as you have it typed or, if you used Markdown, formatted as HTML.
+      </p>
+    </div>
+		<div class="modal-footer">
+      <button class="btn btn-primary" id="continue">Continue This Session</button>
+      <button class="btn" data-dismiss="modal">Close</button>
+    </div>
 	</div>
 
   <div id="text-copied-modal" class="modal hide fade">
@@ -230,13 +228,6 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
     <div class="modal-body">Your text should now be all up in your clipboard. Paste away.</div>
     <div class="modal-footer"></div>
   </div>
-
-  <input type="hidden" id="export" value="text to coyp" />
-  <section id="html" style="display:none;"></section>
-  <section id="close-template" class="close" style="display:none;">
-  	<button class="rounded copy" id="copy">Copy to Clipboard</button>
-  	<button class="rounded close">Close</button>
-  </section>
 
 </body>
 </html>
