@@ -25,6 +25,11 @@ a {
     color: @orange;
     cursor: pointer;
   }
+
+}
+
+.btn {
+  font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 header, section, nav {
@@ -71,7 +76,9 @@ footer {
   background: #000;
   color: @off_white;
   height: 120px;
-  font-size: 12px;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 20px 0;
 
   a {
     color: lighten(@blue, 40%);
@@ -96,7 +103,7 @@ footer {
   border-bottom: 2px solid @dark_blue;
   margin: 0 auto;
   padding: 0;
-  font: 800 20px 'Sonsie One', Arial, sans-serif;
+  font: 800 20px/40px 'Sonsie One', Arial, sans-serif;
   color: @off_white;
   text-shadow: 1px 1px @dark_blue;
   cursor: pointer;

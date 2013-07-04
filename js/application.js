@@ -9,7 +9,41 @@ jQuery.fn.center = function ( ) {
   return this;
 }
 
+var converter = new Showdown.converter( );
+
+function zclip ( element ) {
+	var clip = new ZeroClipboard( $( element ) );
+	clip.on( 'complete', function ( client, args ) {
+		console.log( 'Text copied: ' + args.text );
+	} );
+	clip.on( 'load', function ( client, args ) {
+		// console.log( 'movie loaded' );
+	} );
+	clip.on( 'mousedown', function ( client, args ) {
+		var raw_text = $( '#the-text ').val( );
+		var html_text = converter.makeHtml( raw_text );
+
+		if ( $( this ).attr( 'id' ) == 'export-text' ) {
+			client.setText( raw_text );
+		} else {
+			client.setText( html_text );
+		}
+
+		$( '#textbox' ).trigger( 'editor:text-copied' );
+	} );
+	clip.on( 'noflash', function ( client, args ) {
+		console.log( 'no falsh installed' );
+	} );
+	clip.on( 'wrongflash', function ( client, args ) {
+		console.log( 'falsh is too old ' + args.flashVersion );
+	} );
+	return clip;
+}
+
 $( function ( ) {
+	var text_clip = zclip( '#export-text' );
+	var html_clip = zclip( '#export-html' );
+
 	var EditorView = Backbone.View.extend( {
 		el: '#app',
 		textarea: $( '#the-text' ),
@@ -35,7 +69,8 @@ $( function ( ) {
 			'editor:warn'             : 'warn',
 			'editor:annoy'            : 'annoy',
 			'editor:done'             : 'done',
-			'editor:autosave'         : 'autoSave'
+			'editor:autosave'         : 'autoSave',
+			'editor:text-copied'      : 'copy_success'
 		},
 
 		render: function ( ) {
@@ -81,6 +116,9 @@ $( function ( ) {
 			this.textarea.addClass( 'done' );
 			this.is_done = true;
 			this.goal_complete.show( ).center( );
+		},
+		copy_success: function ( ) {
+			$( '#text-copied-modal' ).modal( 'show' );
 		},
 		keydown: function ( e ) {
 			var which = e.keyCode ? e.keyCode : e.which;
@@ -209,31 +247,6 @@ $( function ( ) {
 		$( '#settings-modal' ).modal( 'hide' );
 	} );
 
-	// TODO: Combine the following two click functions into one
-	$( '#export-as-text' ).click( function ( ) {
-		var converter = new Showdown.converter( );
-		$( '#html' ).center( ).html( converter.makeHtml( $( '#the-text' ).val( ) ) ).removeClass( 'monospace' );
-		var text = $( '#html' ).text( );
-		$close = $( '#close-template' ).clone( ).show( ).attr( 'id', 'close' );
-		$( '#html' ).prepend( $close );
-		$( '#html' ).show( );
-
-		var clip = new ZeroClipboard( $( 'button#copy' ) );
-		clip.setText( text );
-	} );
-
-	$( '#export-as-html' ).click( function ( ) {
-		var converter = new Showdown.converter( );
-		$( '#html' ).center( ).text( converter.makeHtml( $( '#the-text' ).val( ) ) ).addClass( 'monospace' );
-		var text = $( '#html' ).text( );
-		$close = $( '#close-template' ).clone( ).show( ).attr( 'id', 'close' );
-		$( '#html' ).prepend( $close );
-		$( '#html' ).show( );
-
-		var clip = new ZeroClipboard( $( 'button#copy' ) );
-		clip.setText( text );
-	} );
-
 	if ( Modernizr.localstorage ) {
 		$( '#the-text' ).val( localStorage["text"] );
 		$( '#number-of-words' ).val( localStorage["min_words"] || 500 );
@@ -255,9 +268,4 @@ $( function ( ) {
 		$( '#number-of-minutes' ).val( 10 );
 		$( '#disable-backspace' ).prop( 'checked', false );
 	}
-
-	var clip = new ZeroClipboard( );
-	clip.on( 'wrongflash', function ( client, args ) {
-		console.log( 'falsh is too old ' + args.flashVersion );
-	} );
 } );

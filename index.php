@@ -13,7 +13,6 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
-
 	<link href='http://fonts.googleapis.com/css?family=Sonsie+One' rel='stylesheet' type='text/css'>
  	<link href='http://fonts.googleapis.com/css?family=Coda:400,800' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
@@ -58,7 +57,7 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 	<section id="header-smaller">
 		<div class="container centered">
 			<div class="row">
-				<div class="span12">DraftOne</div>
+				<div class="span12 text-center">DraftOne</div>
 			</div>
 		</div>
 	</section>
@@ -104,43 +103,45 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 
 	<section id="app" class="app">
 		<div class="container">
-			<div class="row center">
-				<div id="stats" class="span8 offset2">
-					<span>Current word count: <span id="current-words">0</span></span>
-					<span>Time elapsed: <span id="time-elapsed">0:00</span></span>
-				</div>
-			</div>
-
-			<div class="row">
+      <div class="row">
         <div class="span4 offset2">
           <button id="start" class="btn btn-success"><i class="icon-play"></i> Go!</button>
           <button id="pause" class="btn"><i class="icon-pause"></i> Pause</button>
           <button id="start-over" class="btn"><i class="icon-repeat"></i> Start Over</button>
         </div>
         <div class="span4 text-right">
-          <a href="#settings-modal" role="button" class="btn" data-toggle="modal"><i class="icon-wrench"></i> Settings</a>
+          <a href="#settings-modal" class="btn" data-toggle="modal"><i class="icon-wrench"></i> Settings</a>
+          <div class="btn-group">
+            <a role="button" class="btn dropdown-toggle" data-toggle="dropdown" id="clipboard-menu"><i class="icon-download-alt"></i> Copy to Clipboard</a>
+            <ul class="dropdown-menu text-left">
+              <li><a id="export-text" class="clipboard" data-clipboard-text="">As plain text</a></li>
+              <li><a id="export-html" class="clipboard" data-clipboard-text="">As HTML</a></li>
+            </ul>
+          </div>
         </div>
         <div class="span2">&nbsp;</div>
       </div>
-
+      <hr>
+      <div class="row center">
+        <div id="stats">
+          <div class="span2 offset4 text-center">
+            <span>Current word count:<br><span id="current-words">0</span></span>
+          </div>
+          <div class="span2 text-center">
+            <span>Time elapsed:<br><span id="time-elapsed">0:00</span></span>
+          </div>
+          <div class="span4">&nbsp;</div>
+        </div>
+      </div>
       <div class="row">
 				<div id="textbox" class="span12 center">
           <textarea id="the-text" class="paused" disabled="true"></textarea>
           <p>
             The editor allows <a href="http://daringfireball.net/projects/markdown/">Markdown formatting</a> if that's your thing.
-            |
-            <a href="javascript:;" data-clipboard-target="html" id="export-as-text">Export as Formatted Text</a>
-            |
-            <a href="javascript:;" data-clipboard-target="html" id="export-as-html">Export as Raw HTML</a>
-            <br>
           </p>
 				</div>
 			</div>
 		</div>
-	</section>
-
-	<section id="drawer" style="display:none;">
-		the copied text should go here...
 	</section>
 
 	<section id="goal-complete" style="display:none;">
@@ -155,15 +156,17 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 	<footer id="footer">
 		<div class="container centered">
 			<div class="row">
-				<div class="span6">
-					<p>&copy; 2012 Allen Holt. Follow me on <a href="http://twitter.com/allenholt/" target="_blank">Twitter</a> if you feel like it.</p>
+				<div class="span4 offset1">
+					&copy; <?= date('Y') ?> <a href="http://allenholt.com/">Allen Holt</a>.<br>
+          Follow me on <a href="http://twitter.com/allenholt/" target="_blank">Twitter</a> if you feel like it.
 				</div>
-				<div class="span6">
-					<p class="right">
-						Got feedback, comments or bug reports? <a href="mailto:ajholt@gmail.com?Subject=DraftOne">Send 'em my way.</a><br />
-						You can check out this project on <a href="https://github.com/mr-terrific/draft-one" target="_blank">GitHub</a> if that's the kind of thing you're into.
-					</p>
+        <div class="span2">&nbsp;</div>
+				<div class="span4 text-right">
+					Got feedback, comments or bug reports?<br><a href="mailto:ajholt@gmail.com?Subject=DraftOne">Send 'em my way.</a>
+          <br><br>
+					You can check out this project on <a href="https://github.com/mr-terrific/draft-one" target="_blank">GitHub</a> if that's the kind of thing you're into.
 				</div>
+        <div class="span1">&nbsp;</div>
 			</div>
 		</div>
 	</footer>
@@ -205,7 +208,6 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 		</div>
 		<div class="modal-footer">
 			<p>
-				<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
 				<button class="btn btn-primary" id="save-settings">Save Changes</button>
 			</p>
 		</div>
@@ -219,6 +221,15 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 		<div class="modal-body"></div>
 		<div class="modal-footer"></div>
 	</div>
+
+  <div id="text-copied-modal" class="modal hide fade">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h3>Woo hoo!</h3>
+    </div>
+    <div class="modal-body">Your text should now be all up in your clipboard. Paste away.</div>
+    <div class="modal-footer"></div>
+  </div>
 
   <input type="hidden" id="export" value="text to coyp" />
   <section id="html" style="display:none;"></section>
