@@ -162,6 +162,10 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 		</div>
 	</footer>
 
+  <div class="row">
+    <div class="span12">&nbsp;</div>
+  </div>
+
 	<div id="settings-modal" class="modal hide fade">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
