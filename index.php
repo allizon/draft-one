@@ -5,6 +5,8 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 <html lang="en-us">
 <head>
 	<title>DraftOne | Get your first draft out of your head!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.min.css" />
 	<link rel="stylesheet/less" type="text/css" href="css/style.less?ts=<?= time() ?>" />
@@ -44,13 +46,21 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 
 	<header id="header" title="Click the header to minimize it for more writing space!">
 		<div class="container centered relative">
-			<div class="row">
+			<div class="row visible-desktop">
 				<div class="span8"><h1>DraftOne</h1></div>
 				<div class="span4">
 					<div class="subhead">
 						Keeping your writing feet<br>to the metaphorical fire.</div>
 					</div>
 			</div>
+      <div class="row visible-tablet visible-phone">
+        <div class="span10 offset1">
+          <h1>DraftOne</h1>
+          <p class="subhead">
+            Keeping your writing feet to the metaphorical fire.</div>
+          </p>
+        </div>
+      </div>
 		</div>
 	</header>
 
@@ -230,7 +240,9 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
       <h3>Woo hoo!</h3>
     </div>
     <div class="modal-body">Your text should now be all up in your clipboard. Paste away.</div>
-    <div class="modal-footer"></div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal">Close</button>
+    </div>
   </div>
 
 </body>
