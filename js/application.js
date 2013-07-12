@@ -14,8 +14,6 @@ function zclip ( element ) {
 
 		$( '#textbox' ).trigger( 'editor:text-copied' );
 	} );
-	// TODO - both of the following functions should remove the "Copy to
-	// Cliboard" buttons
 	clip.on( 'noflash', function ( client, args ) {
 		$( '#clipboard-buttons' ).hide( );
 	} );
