@@ -23,13 +23,18 @@ function zclip ( element ) {
 	return clip;
 }
 
+var app = {
+
+};
+
 $( function ( ) {
 	var text_clip = zclip( '#export-text' );
 	var html_clip = zclip( '#export-html' );
 
-	var editor_view = new EditorView( );
-	var header_view = new HeaderView( );
-	var tools_view  = new ToolsView( editor_view );
+	app.header_view = new HeaderView( );
+	app.tools_view  = new ToolsView( );
+	app.stats_view  = new StatsView( );
+	app.editor_view = new EditorView( );
 
 	// ALl of these functiosn should get moved into the EditorView
 	$( '#open-about' ).click( function ( ) {

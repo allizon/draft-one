@@ -75,10 +75,27 @@ module.exports = function(grunt) {
     // qunit: {
     //   files: ['test/**/*.html']
     // },
+    less: {
+      options: {
+        compress: true,
+      },
+      src: {
+        expand: true,
+        cwd:    "../css",
+        src:    "*.less",
+        dest:   "../css",
+        ext:    ".css"
+      }
+    },
     watch: {
       gruntfile: {
-        files: ['<%= jshint.gruntfile.src %>', 'lib/<%= pkg.name %>.js', 'views/*.js'],
-        tasks: ['jshint:gruntfile', 'concat', 'uglify']
+        files: [
+          '<%= jshint.gruntfile.src %>',
+          'lib/<%= pkg.name %>.js',
+          'views/*.js',
+          '../css/style.less'
+        ],
+        tasks: ['jshint:gruntfile', 'concat', 'uglify', 'less']
       },
       // lib_test: {
       //   files: '<%= jshint.lib_test.src %>',
@@ -93,9 +110,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   // grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'concat', 'strip', 'uglify']);
-
+  grunt.registerTask('default', ['jshint', 'concat', 'strip', 'uglify', 'less']);
 };

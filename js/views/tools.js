@@ -1,29 +1,24 @@
-  var ToolsView = Backbone.View.extend( {
-    el                  : '#tools',
+var ToolsView = Backbone.View.extend( {
+  el             : '.toolbar',
+  editor         : null,
+  btn_start      : $( 'a.start' ),
+  btn_pause      : $( 'a.pause' ),
+  btn_stop       : $( 'a.stop' ),
+  btn_settings   : $( 'a.settings' ),
+  btn_export     : $( 'a.export' ),
 
-    editor              : null,
-    settings_button     : '#save-settings',
-    settings_section    : 'section#settings',
-    settings_modal      : '#settings-modal',
+  events: {
+    'click a.start'    : 'start_editor',
+    'click a.settings' : 'show_settings',
+  },
 
-    events              : {
-      'click #save-settings' : 'save_settings'
-    },
+  initialize: function ( ) {
 
-    initialize: function ( editor ) {
-      this.editor = editor;
-    },
-    save_settings: function ( ) {
-      this.settings_section.hide( );
-      // this.editor.start( );
-
-      if ( Modernizr.localstorage ) {
-        localStorage["min_words"]         = $( '#number-of-words' ).val( );
-        localStorage["min_minutes"]       = $( '#number-of-minutes' ).val( );
-        localStorage["disable_backspace"] = $( '#disable-backspace' ).prop( 'checked' ) ? 1 : 0;
-        editor_view.autoSave( );
-      }
-
-      this.settings_modal.modal( 'hide' );
-    }
-  } );
+  },
+  start_editor: function ( ) {
+    app.editor_view.start( );
+  },
+  show_settings: function ( ) {
+    new SettingsView( );
+  },
+} );

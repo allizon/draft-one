@@ -1,8 +1,7 @@
 var EditorView = Backbone.View.extend( {
-  el                  : '#app',
+  el                  : '.editor',
   textarea            : $( '#the-text' ),
-  time_elapsed_label  : $( '#time-elapsed' ),
-  word_count_label    : $( '#current-words' ),
+  stats_view          : null,
   goal_complete       : $( '#goal-complete' ),
   continue            : $( 'button#continue' ),
   start_new_session   : $( 'button#start-new-session' ),
@@ -16,9 +15,6 @@ var EditorView = Backbone.View.extend( {
   is_done             : false,
 
   events: {
-    'click button#start'      : 'start',
-    'click button#pause'      : 'pause',
-    'click button#start-over' : 'start_over',
     'keydown #the-text'       : 'keydown',
     'editor:warn'             : 'warn',
     'editor:annoy'            : 'annoy',
@@ -27,8 +23,10 @@ var EditorView = Backbone.View.extend( {
     'editor:text-copied'      : 'copy_success'
   },
 
+  initialize: function ( ) {
+    app.stats_view.set_word_count( 1000 );
+  },
   render: function ( ) {
-    console.log('rendering')
     this.time_elapsed_label.text( this.timeElapsedString( ) );
     this.word_count_label.text( this.wordCount( ) );
     return this;
@@ -45,6 +43,7 @@ var EditorView = Backbone.View.extend( {
     this.textarea.addClass( 'annoy-' + level );
   },
   start: function ( ) {
+    console.log( 'editor starting...' );
     this.is_paused = false;
     clearInterval( this.interval_id ); // just in case
     this.interval_id = setInterval( this.updater, 1000 );

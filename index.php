@@ -9,7 +9,12 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.min.css" />
-	<link rel="stylesheet/less" type="text/css" href="css/style.less?ts=<?= time() ?>" />
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+<?php if ( $ENV == 'prod' ): ?>
+  <link rel="stylesheet/less" type="text/css" href="css/style.css" />
+<?php else: ?>
+  <link rel="stylesheet/less" type="text/css" href="css/style.less?ts=<?= time() ?>" />
+<?php endif; ?>
 
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
@@ -20,7 +25,6 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
 
 <?php if ( $ENV == 'prod' ): ?>
-  <script type="text/javascript" src="js/less.min.js"></script>
   <script type="text/javascript" src="js/draft-one.min.js"></script>
 <?php else: ?>
   <script type="text/javascript" src="js/less.min.js"></script>
@@ -28,10 +32,13 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
   <script type="text/javascript" src="js/lib/modernizr.js"></script>
   <script type="text/javascript" src="js/lib/underscore-min.js"></script>
   <script type="text/javascript" src="js/lib/backbone-min.js"></script>
+  <script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/lib/ZeroClipboard.min.js"></script>
   <script type="text/javascript" src="js/views/editor.js"></script>
+  <script type="text/javascript" src="js/views/stats.js"></script>
   <script type="text/javascript" src="js/views/tools.js"></script>
   <script type="text/javascript" src="js/views/header.js"></script>
+  <script type="text/javascript" src="js/views/settings.js"></script>
   <script type="text/javascript" src="js/app/draft-one.js"></script>
 <?php endif; ?>
 
@@ -52,6 +59,7 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 
 <body>
 
+  <!----- HEADER -->
 	<header id="header" title="Click the header to minimize it for more writing space!">
 		<div class="container centered relative">
 			<div class="row visible-desktop">
@@ -71,16 +79,22 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
       </div>
 		</div>
 	</header>
+  <!----- /HEADER -->
 
-	<section id="header-smaller">
-		<div class="container centered">
-			<div class="row">
-				<div class="span12 text-center">DraftOne</div>
-			</div>
-		</div>
-	</section>
+  <!----- TOOLBAR -->
+  <section class="toolbar">
+    <ul>
+      <li><a class="start" alt="" title=""><i class="icon-play"></i></a></li>
+      <li><a class="pause" alt="" title=""><i class="icon-pause icon-white"></i></a></li>
+      <li><a class="start-over" alt="" title=""><i class="icon-repeat icon-white"></i></a></li>
+      <li><a class="settings" alt="" title=""><i class="icon-cog icon-white"></i></a></li>
+      <li><a class="settings" alt="" title=""><i class="icon-download icon-white"></i></a></li>
+    </ul>
+    <div class="site-title">DraftOne</div>
+  </section>
+  <!----- /TOOLBAR -->
 
-	<section id="about">
+	<section id="about" style="display:none">
 		<div class="container">
 			<div class="row">
 				<h2><a id="open-about">Hey, so just what is this "DraftOne" thing, anyway? &raquo;</a></h2>
@@ -119,63 +133,34 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 		</div>
 	</section>
 
-  <section id="tools">
+  <!----- STATS -->
+  <section class="stats">
+    <div class="visible-desktop">
+      <div class="span2 offset4 text-center">
+        <span>Current word count:<br><span class="current-words">0</span></span>
+      </div>
+      <div class="span2 text-center">
+        <span>Time elapsed:<br><span class="time-elapsed">0:00</span></span>
+      </div>
+      <div class="span4">&nbsp;</div>
+    </div>
+  </section>
+  <!----- /STATS -->
+
+  <!----- EDITOR -->
+  <section class="editor">
     <div class="container">
       <div class="row">
-        <div class="span4 offset2">
-          <button id="start" class="btn btn-success"><i class="icon-play"></i> Go!</button>
-          <button id="pause" class="btn"><i class="icon-pause"></i> Pause</button>
-          <button id="start-over" class="btn"><i class="icon-repeat"></i> Start Over</button>
-        </div>
-        <div class="span4 text-right">
-          <a href="#settings-modal" class="btn" data-toggle="modal"><i class="icon-wrench"></i> Settings</a>
-          <div class="btn-group" id="clipboard-buttons">
-            <a role="button" class="btn dropdown-toggle" data-toggle="dropdown" id="clipboard-menu"><i class="icon-download-alt"></i> Copy to Clipboard</a>
-            <ul class="dropdown-menu text-left">
-              <li><a id="export-text" class="clipboard" data-clipboard-text="">As plain text</a></li>
-              <li><a id="export-html" class="clipboard" data-clipboard-text="">As HTML</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="span2">&nbsp;</div>
-      </div>
-  </section>
-
-  <hr>
-
-	<section id="app" class="app">
-      <div class="row center">
-        <div id="stats">
-        	<div class="visible-desktop">
-	          <div class="span2 offset4 text-center">
-	            <span>Current word count:<br><span id="current-words">0</span></span>
-	          </div>
-	          <div class="span2 text-center">
-	            <span>Time elapsed:<br><span id="time-elapsed">0:00</span></span>
-	          </div>
-	          <div class="span4">&nbsp;</div>
-        	</div>
-        	<div class="visible-tablet visible-phone">
-	          <div class="span4 offset2 text-left">
-	            <span>Current word count: <span id="current-words">0</span></span>
-	          </div>
-	          <div class="span4 text-right">
-	            <span>Time elapsed: <span id="time-elapsed">0:00</span></span>
-	          </div>
-	          <div class="span2">&nbsp;</div>
-        	</div>
-        </div>
-      </div>
-      <div class="row">
-				<div id="textbox" class="span12 center">
-          <textarea id="the-text" class="paused" disabled="true"></textarea>
+        <div id="textbox" class="span12 text-center">
+          <textarea id="the-text" class="paused" disabled="false"></textarea>
           <p>
             The editor allows <a href="http://daringfireball.net/projects/markdown/">Markdown formatting</a> if that's your thing.
           </p>
-				</div>
-			</div>
-		</div>
-	</section>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!----- /EDITOR -->
 
 	<footer id="footer">
 		<div class="container centered">
@@ -199,6 +184,7 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
     <div class="span12">&nbsp;</div>
   </div>
 
+  <!----- SETTINGS MODAL -->
 	<div id="settings-modal" class="modal hide fade">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -238,6 +224,7 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 			<button class="btn btn-primary" id="save-settings">Save Changes</button>
 		</div>
 	</div>
+  <!----- /SETTINGS MODAL -->
 
 	<div id="success-modal" class="modal hide fade">
 		<div class="modal-header">

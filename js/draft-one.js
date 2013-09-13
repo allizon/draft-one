@@ -1,5 +1,5 @@
 /*! draft-one - v0.1.0 - 2013-09-13
-* Copyright (c) 2013 ; Licensed  */
+* Copyright (c) 2013 Allen Holt; Licensed  */
 //     Underscore.js 1.4.2
 //     http://underscorejs.org
 //     (c) 2009-2012 Jeremy Ashkenas, DocumentCloud Inc.
@@ -1356,10 +1356,9 @@ var escapeCharacters_callback = function(wholeMatch,m1) {
  * v1.2.0-beta.1
  */(function(){"use strict";var a=function(a,b){var c=a.style[b];a.currentStyle?c=a.currentStyle[b]:window.getComputedStyle&&(c=document.defaultView.getComputedStyle(a,null).getPropertyValue(b));if(c=="auto"&&b=="cursor"){var d=["a"];for(var e=0;e<d.length;e++)if(a.tagName.toLowerCase()==d[e])return"pointer"}return c},b=function(a){if(!l.prototype._singleton)return;a||(a=window.event);var b;this!==window?b=this:a.target?b=a.target:a.srcElement&&(b=a.srcElement),l.prototype._singleton.setCurrent(b)},c=function(a,b,c){a.addEventListener?a.addEventListener(b,c,!1):a.attachEvent&&a.attachEvent("on"+b,c)},d=function(a,b,c){a.removeEventListener?a.removeEventListener(b,c,!1):a.detachEvent&&a.detachEvent("on"+b,c)},e=function(a,b){if(a.addClass)return a.addClass(b),a;if(b&&typeof b=="string"){var c=(b||"").split(/\s+/);if(a.nodeType===1)if(!a.className)a.className=b;else{var d=" "+a.className+" ",e=a.className;for(var f=0,g=c.length;f<g;f++)d.indexOf(" "+c[f]+" ")<0&&(e+=" "+c[f]);a.className=e.replace(/^\s+|\s+$/g,"")}}return a},f=function(a,b){if(a.removeClass)return a.removeClass(b),a;if(b&&typeof b=="string"||b===undefined){var c=(b||"").split(/\s+/);if(a.nodeType===1&&a.className)if(b){var d=(" "+a.className+" ").replace(/[\n\t]/g," ");for(var e=0,f=c.length;e<f;e++)d=d.replace(" "+c[e]+" "," ");a.className=d.replace(/^\s+|\s+$/g,"")}else a.className=""}return a},g=function(b){var c={left:0,top:0,width:b.width||b.offsetWidth||0,height:b.height||b.offsetHeight||0,zIndex:9999},d=a(b,"zIndex");d&&d!="auto"&&(c.zIndex=parseInt(d,10));while(b){var e=parseInt(a(b,"borderLeftWidth"),10),f=parseInt(a(b,"borderTopWidth"),10);c.left+=isNaN(b.offsetLeft)?0:b.offsetLeft,c.left+=isNaN(e)?0:e,c.top+=isNaN(b.offsetTop)?0:b.offsetTop,c.top+=isNaN(f)?0:f,b=b.offsetParent}return c},h=function(a){var b=l.prototype._singleton;return b.options.useNoCache?(a.indexOf("?")>=0?"&nocache=":"?nocache=")+(new Date).getTime():""},i=function(a){var b=[];if(a.trustedDomains){var c;typeof a.trustedDomains=="string"&&a.trustedDomains?c=[a.trustedDomains]:"length"in a.trustedDomains&&(c=a.trustedDomains),b.push("trustedDomain="+encodeURIComponent(c.join(",")))}return typeof a.amdModuleId=="string"&&a.amdModuleId&&b.push("amdModuleId="+encodeURIComponent(a.amdModuleId)),b.join("&")},j=function(a,b){if(b.indexOf)return b.indexOf(a);for(var c=0,d=b.length;c<d;c++)if(b[c]===a)return c;return-1},k=function(a){if(typeof a=="string")throw new TypeError("ZeroClipboard doesn't accept query strings.");return a.length?a:[a]},l=function(a,b){a&&(l.prototype._singleton||this).glue(a);if(l.prototype._singleton)return l.prototype._singleton;l.prototype._singleton=this,this.options={};for(var c in o)this.options[c]=o[c];for(var d in b)this.options[d]=b[d];this.handlers={},l.detectFlashSupport()&&p()},m,n=[];l.prototype.setCurrent=function(b){m=b,this.reposition(),b.getAttribute("title")&&this.setTitle(b.getAttribute("title")),this.setHandCursor(a(b,"cursor")=="pointer")},l.prototype.setText=function(a){a&&a!==""&&(this.options.text=a,this.ready()&&this.flashBridge.setText(a))},l.prototype.setTitle=function(a){a&&a!==""&&this.htmlBridge.setAttribute("title",a)},l.prototype.setSize=function(a,b){this.ready()&&this.flashBridge.setSize(a,b)},l.prototype.setHandCursor=function(a){this.ready()&&this.flashBridge.setHandCursor(a)},l.version="1.2.0-beta.1";var o={moviePath:"ZeroClipboard.swf",trustedDomains:null,text:null,hoverClass:"zeroclipboard-is-hover",activeClass:"zeroclipboard-is-active",allowScriptAccess:"sameDomain",useNoCache:!0,amdModuleId:null};l.setDefaults=function(a){for(var b in a)o[b]=a[b]},l.destroy=function(){l.prototype._singleton.unglue(n);var a=l.prototype._singleton.htmlBridge;a.parentNode.removeChild(a),delete l.prototype._singleton},l.detectFlashSupport=function(){var a=!1;if(typeof ActiveXObject=="function")try{new ActiveXObject("ShockwaveFlash.ShockwaveFlash")&&(a=!0)}catch(b){}return!a&&navigator.mimeTypes["application/x-shockwave-flash"]&&(a=!0),a};var p=function(){var a=l.prototype._singleton,b=document.getElementById("global-zeroclipboard-html-bridge");if(!b){var c='      <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="global-zeroclipboard-flash-bridge" width="100%" height="100%">         <param name="movie" value="'+a.options.moviePath+h(a.options.moviePath)+'"/>         <param name="allowScriptAccess" value="'+a.options.allowScriptAccess+'"/>         <param name="scale" value="exactfit"/>         <param name="loop" value="false"/>         <param name="menu" value="false"/>         <param name="quality" value="best" />         <param name="bgcolor" value="#ffffff"/>         <param name="wmode" value="transparent"/>         <param name="flashvars" value="'+i(a.options)+'"/>         <embed src="'+a.options.moviePath+h(a.options.moviePath)+'"           loop="false" menu="false"           quality="best" bgcolor="#ffffff"           width="100%" height="100%"           name="global-zeroclipboard-flash-bridge"           allowScriptAccess="always"           allowFullScreen="false"           type="application/x-shockwave-flash"           wmode="transparent"           pluginspage="http://www.macromedia.com/go/getflashplayer"           flashvars="'+i(a.options)+'"           scale="exactfit">         </embed>       </object>';b=document.createElement("div"),b.id="global-zeroclipboard-html-bridge",b.setAttribute("class","global-zeroclipboard-container"),b.setAttribute("data-clipboard-ready",!1),b.style.position="absolute",b.style.left="-9999px",b.style.top="-9999px",b.style.width="15px",b.style.height="15px",b.style.zIndex="9999",b.innerHTML=c,document.body.appendChild(b)}a.htmlBridge=b,a.flashBridge=document["global-zeroclipboard-flash-bridge"]||b.children[0].lastElementChild};l.prototype.resetBridge=function(){this.htmlBridge.style.left="-9999px",this.htmlBridge.style.top="-9999px",this.htmlBridge.removeAttribute("title"),this.htmlBridge.removeAttribute("data-clipboard-text"),f(m,this.options.activeClass),m=null,this.options.text=null},l.prototype.ready=function(){var a=this.htmlBridge.getAttribute("data-clipboard-ready");return a==="true"||a===!0},l.prototype.reposition=function(){if(!m)return!1;var a=g(m);this.htmlBridge.style.top=a.top+"px",this.htmlBridge.style.left=a.left+"px",this.htmlBridge.style.width=a.width+"px",this.htmlBridge.style.height=a.height+"px",this.htmlBridge.style.zIndex=a.zIndex+1,this.setSize(a.width,a.height)},l.dispatch=function(a,b){l.prototype._singleton.receiveEvent(a,b)},l.prototype.on=function(a,b){var c=a.toString().split(/\s/g);for(var d=0;d<c.length;d++)a=c[d].toLowerCase().replace(/^on/,""),this.handlers[a]||(this.handlers[a]=b);this.handlers.noflash&&!l.detectFlashSupport()&&this.receiveEvent("onNoFlash",null)},l.prototype.addEventListener=l.prototype.on,l.prototype.off=function(a,b){var c=a.toString().split(/\s/g);for(var d=0;d<c.length;d++){a=c[d].toLowerCase().replace(/^on/,"");for(var e in this.handlers)e===a&&this.handlers[e]===b&&delete this.handlers[e]}},l.prototype.removeEventListener=l.prototype.off,l.prototype.receiveEvent=function(a,b){a=a.toString().toLowerCase().replace(/^on/,"");var c=m;switch(a){case"load":if(b&&parseFloat(b.flashVersion.replace(",",".").replace(/[^0-9\.]/gi,""))<10){this.receiveEvent("onWrongFlash",{flashVersion:b.flashVersion});return}this.htmlBridge.setAttribute("data-clipboard-ready",!0);break;case"mouseover":e(c,this.options.hoverClass);break;case"mouseout":f(c,this.options.hoverClass),this.resetBridge();break;case"mousedown":e(c,this.options.activeClass);break;case"mouseup":f(c,this.options.activeClass);break;case"datarequested":var d=c.getAttribute("data-clipboard-target"),g=d?document.getElementById(d):null;if(g){var h=g.value||g.textContent||g.innerText;h&&this.setText(h)}else{var i=c.getAttribute("data-clipboard-text");i&&this.setText(i)}break;case"complete":this.options.text=null}if(this.handlers[a]){var j=this.handlers[a];typeof j=="function"?j.call(c,this,b):typeof j=="string"&&window[j].call(c,this,b)}},l.prototype.glue=function(a){a=k(a);for(var d=0;d<a.length;d++)j(a[d],n)==-1&&(n.push(a[d]),c(a[d],"mouseover",b))},l.prototype.unglue=function(a){a=k(a);for(var c=0;c<a.length;c++){d(a[c],"mouseover",b);var e=j(a[c],n);e!=-1&&n.splice(e,1)}},typeof module!="undefined"?module.exports=l:typeof define=="function"&&define.amd?define(function(){return l}):window.ZeroClipboard=l})();
 var EditorView = Backbone.View.extend( {
-  el                  : '#app',
+  el                  : '.editor',
   textarea            : $( '#the-text' ),
-  time_elapsed_label  : $( '#time-elapsed' ),
-  word_count_label    : $( '#current-words' ),
+  stats_view          : null,
   goal_complete       : $( '#goal-complete' ),
   continue            : $( 'button#continue' ),
   start_new_session   : $( 'button#start-new-session' ),
@@ -1373,9 +1372,6 @@ var EditorView = Backbone.View.extend( {
   is_done             : false,
 
   events: {
-    'click button#start'      : 'start',
-    'click button#pause'      : 'pause',
-    'click button#start-over' : 'start_over',
     'keydown #the-text'       : 'keydown',
     'editor:warn'             : 'warn',
     'editor:annoy'            : 'annoy',
@@ -1384,8 +1380,10 @@ var EditorView = Backbone.View.extend( {
     'editor:text-copied'      : 'copy_success'
   },
 
+  initialize: function ( ) {
+    app.stats_view.set_word_count( 1000 );
+  },
   render: function ( ) {
-    0
     this.time_elapsed_label.text( this.timeElapsedString( ) );
     this.word_count_label.text( this.wordCount( ) );
     return this;
@@ -1402,6 +1400,7 @@ var EditorView = Backbone.View.extend( {
     this.textarea.addClass( 'annoy-' + level );
   },
   start: function ( ) {
+    0;
     this.is_paused = false;
     clearInterval( this.interval_id ); // just in case
     this.interval_id = setInterval( this.updater, 1000 );
@@ -1508,11 +1507,9 @@ var HeaderView = Backbone.View.extend( {
   el                  : '#header',
 
   header              : $( 'header' ),
-  small_header        : $( '#header-smaller' ),
 
   events              : {
     'click header'          : 'hide_header',
-    'click #header-smaller' : 'hide_small_header'
   },
 
   hide_header: function ( ) {
@@ -1533,35 +1530,72 @@ var HeaderView = Backbone.View.extend( {
     localStorage["small_header"] = 'false';
   }
 } );
-  var ToolsView = Backbone.View.extend( {
-    el                  : '#tools',
+var SettingsView = Backbone.View.extend( {
+  el                      : '#settings-modal',
+  input_number_of_words   : $( '#number-of-words' ),
+  input_number_of_minutes : $( '#number-of-minutes' ),
+  input_disable_backspace : $( '#disable-backspace' ),
 
-    editor              : null,
-    settings_button     : '#save-settings',
-    settings_section    : 'section#settings',
-    settings_modal      : '#settings-modal',
+  events : {
+    'click button#save-settings' : 'save_settings',
+  },
 
-    events              : {
-      'click #save-settings' : 'save_settings'
-    },
-
-    initialize: function ( editor ) {
-      this.editor = editor;
-    },
-    save_settings: function ( ) {
-      this.settings_section.hide( );
-      // this.editor.start( );
-
-      if ( Modernizr.localstorage ) {
-        localStorage["min_words"]         = $( '#number-of-words' ).val( );
-        localStorage["min_minutes"]       = $( '#number-of-minutes' ).val( );
-        localStorage["disable_backspace"] = $( '#disable-backspace' ).prop( 'checked' ) ? 1 : 0;
-        editor_view.autoSave( );
-      }
-
-      this.settings_modal.modal( 'hide' );
+  initialize: function ( ) {
+    this.render( );
+    this.$el.modal( 'show' );
+  },
+  save_settings: function ( ) {
+    if ( Modernizr.localstorage ) {
+      localStorage["min_words"]         = this.input_number_of_words.val( );
+      localStorage["min_minutes"]       = this.input_number_of_minutes.val( );
+      localStorage["disable_backspace"] = this.input_disable_backspace.prop( 'checked' ) ? 1 : 0;
+      app.editor_view.autoSave( );
     }
-  } );
+
+    this.$el.modal( 'hide' );
+    delete this;
+  }
+} );
+var StatsView = Backbone.View.extend( {
+  el                  : '.stats',
+  events              : {
+
+  },
+
+  initialize: function ( ) {
+
+  },
+  set_word_count: function ( wc ) {
+    this.$( '.current-words' ).html( wc );
+  },
+  set_time_elapsed: function ( t ) {
+    this.$( '.time-elapsed' ).html( t );
+  }
+} );
+var ToolsView = Backbone.View.extend( {
+  el             : '.toolbar',
+  editor         : null,
+  btn_start      : $( 'a.start' ),
+  btn_pause      : $( 'a.pause' ),
+  btn_stop       : $( 'a.stop' ),
+  btn_settings   : $( 'a.settings' ),
+  btn_export     : $( 'a.export' ),
+
+  events: {
+    'click a.start'    : 'start_editor',
+    'click a.settings' : 'show_settings',
+  },
+
+  initialize: function ( ) {
+
+  },
+  start_editor: function ( ) {
+    app.editor_view.start( );
+  },
+  show_settings: function ( ) {
+    new SettingsView( );
+  },
+} );
 
 var converter = new Showdown.converter( );
 
@@ -1588,13 +1622,18 @@ function zclip ( element ) {
 	return clip;
 }
 
+var app = {
+
+};
+
 $( function ( ) {
 	var text_clip = zclip( '#export-text' );
 	var html_clip = zclip( '#export-html' );
 
-	var editor_view = new EditorView( );
-	var header_view = new HeaderView( );
-	var tools_view  = new ToolsView( editor_view );
+	app.header_view = new HeaderView( );
+	app.tools_view  = new ToolsView( );
+	app.stats_view  = new StatsView( );
+	app.editor_view = new EditorView( );
 
 	// ALl of these functiosn should get moved into the EditorView
 	$( '#open-about' ).click( function ( ) {

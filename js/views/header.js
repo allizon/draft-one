@@ -2,11 +2,9 @@ var HeaderView = Backbone.View.extend( {
   el                  : '#header',
 
   header              : $( 'header' ),
-  small_header        : $( '#header-smaller' ),
 
   events              : {
     'click header'          : 'hide_header',
-    'click #header-smaller' : 'hide_small_header'
   },
 
   hide_header: function ( ) {
