@@ -19,14 +19,22 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
  	<link href='http://fonts.googleapis.com/css?family=Coda:400,800' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
 
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/less.min.js"></script>
-	<script type="text/javascript" src="js/showdown.js"></script>
-	<script type="text/javascript" src="js/modernizr.js"></script>
-	<script type="text/javascript" src="js/underscore-min.js"></script>
-	<script type="text/javascript" src="js/backbone-min.js"></script>
-	<script type="text/javascript" src="js/ZeroClipboard.min.js"></script>
-	<script type="text/javascript" src="js/application.js"></script>
+<?php if ( $ENV == 'prod' ): ?>
+  <script type="text/javascript" src="js/less.min.js"></script>
+  <script type="text/javascript" src="js/draft-one.min.js"></script>
+<?php else: ?>
+  <script type="text/javascript" src="js/less.min.js"></script>
+  <script type="text/javascript" src="js/lib/showdown.js"></script>
+  <script type="text/javascript" src="js/lib/modernizr.js"></script>
+  <script type="text/javascript" src="js/lib/underscore-min.js"></script>
+  <script type="text/javascript" src="js/lib/backbone-min.js"></script>
+  <script type="text/javascript" src="js/lib/ZeroClipboard.min.js"></script>
+  <script type="text/javascript" src="js/views/editor.js"></script>
+  <script type="text/javascript" src="js/views/tools.js"></script>
+  <script type="text/javascript" src="js/views/header.js"></script>
+  <script type="text/javascript" src="js/app/draft-one.js"></script>
+<?php endif; ?>
+
 <?php if ( $ENV == 'prod' ): ?>
 	<script type="text/javascript">
 		var _gaq = _gaq || [];
