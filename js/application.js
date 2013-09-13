@@ -28,21 +28,21 @@ $( function ( ) {
 	var html_clip = zclip( '#export-html' );
 
 	var EditorView = Backbone.View.extend( {
-		el: '#app',
-		textarea: $( '#the-text' ),
-		time_elapsed_label: $( '#time-elapsed' ),
-		word_count_label: $( '#current-words' ),
-		goal_complete: $( '#goal-complete' ),
-		continue: $( 'button#continue' ),
-		start_new_session: $( 'button#start-new-session' ),
-		is_done: false,
-		is_paused: false,
-		interval_id: null,
-		time_not_typing: 0,
-		time_elapsed: 0,
-		interval_id: null,
-		paused: false,
-		is_done: false,
+		el  								: '#app',
+		textarea  					: $( '#the-text' ),
+		time_elapsed_label  : $( '#time-elapsed' ),
+		word_count_label  	: $( '#current-words' ),
+		goal_complete  			: $( '#goal-complete' ),
+		continue  					: $( 'button#continue' ),
+		start_new_session  	: $( 'button#start-new-session' ),
+		is_done  						: false,
+		is_paused  					: false,
+		interval_id  				: null,
+		time_not_typing  		: 0,
+		time_elapsed  			: 0,
+		interval_id  				: null,
+		paused  						: false,
+		is_done  						: false,
 
 		events: {
 			'click button#start'      : 'start',
@@ -75,7 +75,7 @@ $( function ( ) {
 		start: function ( ) {
 			this.is_paused = false;
 			clearInterval( this.interval_id ); // just in case
-			this.interval_id = setInterval( updater, 1000 );
+			this.interval_id = setInterval( this.updater, 1000 );
 			this.reset( );
 		},
 		pause: function ( ) {
@@ -136,48 +136,108 @@ $( function ( ) {
 			}
 
 			return Math.floor( this.time_elapsed / 60 ) + ':' + minutes;
+		},
+		updater: function ( ) {
+			this.time_not_typing++;
+			this.time_elapsed++;
+
+			if ( !this.is_done ) {
+				if ( this.time_not_typing >= 40 ) {
+					$( '#textbox' ).trigger( 'editor:annoy', 3 );
+				}
+				else if ( this.time_not_typing >= 30 ) {
+					$( '#textbox' ).trigger( 'editor:annoy', 2 );
+				}
+				else if ( this.time_not_typing >= 20 ) {
+					$( '#textbox' ).trigger( 'editor:annoy', 1 );
+				}
+				else if ( this.time_not_typing >= 10 ) {
+					$( '#textbox' ).trigger( 'editor:warn' );
+				}
+
+				if ( true == $( '#which-number-of-words' ).prop( 'checked' ) ) {
+					if ( this.wordCount( ) >= $( '#number-of-words' ).val( ) ) {
+						$( '#textbox' ).trigger( 'editor:done' );
+					}
+				} else {
+					if ( this.time_elapsed >= $( '#number-of-minutes' ).val( ) * 60 ) {
+						$( '#textbox' ).trigger( 'editor:done' );
+					}
+				}
+			}
+
+			// autosave every 10 seconds
+			if ( 0 == this.time_elapsed % 10 ) {
+				$( '#textbox' ).trigger( 'editor:autosave' );
+			}
+
+			this.render( );
 		}
 	} );
 
+	var HeaderView = Backbone.View.extend( {
+		el  								: '#header',
+
+		header              : $( 'header' ),
+		small_header        : $( '#header-smaller' ),
+
+		events              : {
+			'click header' 					: 'hide_header'
+			'click #header-smaller' : 'hide_small_header'
+		},
+
+		hide_header: function ( ) {
+			parent = this;
+			this.header.animate( { 'height': '0px' }, 500, function ( ) {
+				$( this ).hide( );
+				parent.small_header.animate( { 'height': '48px' }, 350 );
+			} );
+
+			localStorage["small_header"] = 'true';
+		},
+		hide_small_header: function ( ) {
+			parent = this;
+			this.small_header.animate( { 'height': '0px' }, 350, function ( ) {
+				parent.header.show( ).animate( { 'height': '157px' } );
+			} );
+
+			localStorage["small_header"] = 'false';
+		}
+	}
+
+	var ToolsView = Backbone.View.extend( {
+		el  								: '#tools',
+
+		editor 							: null,
+		settings_button     : '#save-settings',
+		settings_section    : 'section#settings',
+		settings_modal      : '#settings-modal',
+
+		events							: {
+			'click #save-settings' : 'save_settings'
+		},
+
+		initialize: function ( editor ) {
+			this.editor = editor;
+		},
+		save_settings: function ( ) {
+			this.settings_section.hide( );
+			this.editor.start( );
+
+			if ( Modernizr.localstorage ) {
+				localStorage["min_words"] 				= $( '#number-of-words' ).val( );
+				localStorage["min_minutes"] 			= $( '#number-of-minutes' ).val( );
+				localStorage["disable_backspace"] = $( '#disable-backspace' ).prop( 'checked' ) ? 1 : 0;
+				editor_view.autoSave( );
+			}
+
+			this.settings_modal.modal( 'hide' );
+		}
+	}
 
 	var editor_view = new EditorView( );
-
-	function updater ( ) {
-		editor_view.time_not_typing++;
-		editor_view.time_elapsed++;
-
-		if ( !editor_view.is_done ) {
-			if ( editor_view.time_not_typing >= 40 ) {
-				$( '#textbox' ).trigger( 'editor:annoy', 3 );
-			}
-			else if ( editor_view.time_not_typing >= 30 ) {
-				$( '#textbox' ).trigger( 'editor:annoy', 2 );
-			}
-			else if ( editor_view.time_not_typing >= 20 ) {
-				$( '#textbox' ).trigger( 'editor:annoy', 1 );
-			}
-			else if ( editor_view.time_not_typing >= 10 ) {
-				$( '#textbox' ).trigger( 'editor:warn' );
-			}
-
-			if ( true == $( '#which-number-of-words' ).prop( 'checked' ) ) {
-				if ( editor_view.wordCount( ) >= $( '#number-of-words' ).val( ) ) {
-					$( '#textbox' ).trigger( 'editor:done' );
-				}
-			} else {
-				if ( editor_view.time_elapsed >= $( '#number-of-minutes' ).val( ) * 60 ) {
-					$( '#textbox' ).trigger( 'editor:done' );
-				}
-			}
-		}
-
-		// autosave every 10 seconds
-		if ( 0 == editor_view.time_elapsed % 10 ) {
-			$( '#textbox' ).trigger( 'editor:autosave' );
-		}
-
-		editor_view.render( );
-	}
+	var header_view = new HeaderView( );
+	var tools_view  = new ToolsView( editor_view );
 
 	// ALl of these functiosn should get moved into the EditorView
 	$( '#open-about' ).click( function ( ) {
@@ -216,19 +276,19 @@ $( function ( ) {
 		localStorage["small_header"] = 'false';
 	} );
 
-	$( '#save-settings' ).click( function ( ) {
-		$( 'section#settings' ).hide( );
-		editor_view.start( );
+	// $( '#save-settings' ).click( function ( ) {
+	// 	$( 'section#settings' ).hide( );
+	// 	editor_view.start( );
 
-		if ( Modernizr.localstorage ) {
-			localStorage["min_words"] = $( '#number-of-words' ).val( );
-			localStorage["min_minutes"] = $( '#number-of-minutes' ).val( );
-			localStorage["disable_backspace"] = $( '#disable-backspace' ).prop( 'checked' ) ? 1 : 0;
-			editor_view.autoSave( );
-		}
+	// 	if ( Modernizr.localstorage ) {
+	// 		localStorage["min_words"] = $( '#number-of-words' ).val( );
+	// 		localStorage["min_minutes"] = $( '#number-of-minutes' ).val( );
+	// 		localStorage["disable_backspace"] = $( '#disable-backspace' ).prop( 'checked' ) ? 1 : 0;
+	// 		editor_view.autoSave( );
+	// 	}
 
-		$( '#settings-modal' ).modal( 'hide' );
-	} );
+	// 	$( '#settings-modal' ).modal( 'hide' );
+	// } );
 
 	if ( Modernizr.localstorage ) {
 		$( '#the-text' ).val( localStorage["text"] );

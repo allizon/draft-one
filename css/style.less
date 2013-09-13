@@ -86,7 +86,7 @@ header {
   @media (max-width: 767px) {
     h1 {
       font: 800 48px 'Sonsie One', Arial, sans-serif;
-      text-align: right;
+      text-align: center;
     }
 
     .subhead {
@@ -456,12 +456,22 @@ input.text {
   margin-left: 10px;
 }
 
-#current-words, #time-elapsed {
-  font-size: 200%;
-  font-weight: bold;
-  font-style: normal;
-  color: #000;
-  padding-left: 10px;
+.visible-desktop {
+  #current-words, #time-elapsed {
+    font-size: 200%;
+    font-weight: bold;
+    font-style: normal;
+    color: #000;
+    padding-left: 10px;
+  }
+}
+
+.visible-tablet, .visible-phone {
+  #current-words, #time-elapsed {
+    font-weight: bold;
+    font-style: normal;
+    color: #000;
+  }
 }
 
 .clearfix:after {

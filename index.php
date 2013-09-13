@@ -111,8 +111,8 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 		</div>
 	</section>
 
-	<section id="app" class="app">
-		<div class="container">
+  <section id="tools">
+    <div class="container">
       <div class="row">
         <div class="span4 offset2">
           <button id="start" class="btn btn-success"><i class="icon-play"></i> Go!</button>
@@ -131,16 +131,31 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
         </div>
         <div class="span2">&nbsp;</div>
       </div>
-      <hr>
+  </section>
+
+  <hr>
+
+	<section id="app" class="app">
       <div class="row center">
         <div id="stats">
-          <div class="span2 offset4 text-center">
-            <span>Current word count:<br><span id="current-words">0</span></span>
-          </div>
-          <div class="span2 text-center">
-            <span>Time elapsed:<br><span id="time-elapsed">0:00</span></span>
-          </div>
-          <div class="span4">&nbsp;</div>
+        	<div class="visible-desktop">
+	          <div class="span2 offset4 text-center">
+	            <span>Current word count:<br><span id="current-words">0</span></span>
+	          </div>
+	          <div class="span2 text-center">
+	            <span>Time elapsed:<br><span id="time-elapsed">0:00</span></span>
+	          </div>
+	          <div class="span4">&nbsp;</div>
+        	</div>
+        	<div class="visible-tablet visible-phone">
+	          <div class="span4 offset2 text-left">
+	            <span>Current word count: <span id="current-words">0</span></span>
+	          </div>
+	          <div class="span4 text-right">
+	            <span>Time elapsed: <span id="time-elapsed">0:00</span></span>
+	          </div>
+	          <div class="span2">&nbsp;</div>
+        	</div>
         </div>
       </div>
       <div class="row">
