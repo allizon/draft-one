@@ -3,4 +3,4 @@ a{color:#19334d;font-weight:bold;transition:color .5s,text-decoration .5s;-moz-t
 .btn{font-family:'Open Sans',Helvetica,Arial,sans-serif}
 section.toolbar{background:#19334d;height:36px;line-height:36px}section.toolbar .site-title{float:left;color:#efefef;vertical-align:middle;padding-left:20px}
 section.toolbar ul{float:right;padding-right:20px}section.toolbar ul li{display:inline;height:36px;line-height:36px}section.toolbar ul li a{color:#efefef;font-size:24px;width:24px;vertical-align:middle;padding-left:6px}
-section.editor textarea{background:#e2e2e2;border:0;width:900px;height:500px;margin:0 auto}
+section.editor textarea{background:#efefef;border:0;width:900px;height:500px;margin:0 auto}

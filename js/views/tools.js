@@ -9,6 +9,7 @@ var ToolsView = Backbone.View.extend( {
 
   events: {
     'click a.start'    : 'start_editor',
+    'click a.pause'    : 'pause_editor',
     'click a.settings' : 'show_settings',
   },
 
@@ -17,6 +18,9 @@ var ToolsView = Backbone.View.extend( {
   },
   start_editor: function ( ) {
     app.editor_view.start( );
+  },
+  pause_editor: function ( ) {
+    app.editor_view.pause( );
   },
   show_settings: function ( ) {
     new SettingsView( );

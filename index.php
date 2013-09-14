@@ -135,14 +135,15 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 
   <!----- STATS -->
   <section class="stats">
-    <div class="visible-desktop">
-      <div class="span2 offset4 text-center">
-        <span>Current word count:<br><span class="current-words">0</span></span>
+    <div class="container">
+      <div class="row">
+        <div class="span6">
+          <span>Current word count: <span class="current-words">0</span></span>
+        </div>
+        <div class="span6 text-right">
+          <span>Time elapsed: <span class="time-elapsed">0:00</span></span>
+        </div>
       </div>
-      <div class="span2 text-center">
-        <span>Time elapsed:<br><span class="time-elapsed">0:00</span></span>
-      </div>
-      <div class="span4">&nbsp;</div>
     </div>
   </section>
   <!----- /STATS -->
@@ -152,7 +153,7 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
     <div class="container">
       <div class="row">
         <div id="textbox" class="span12 text-center">
-          <textarea id="the-text" class="paused" disabled="false"></textarea>
+          <textarea id="the-text" class="paused" readonly="true"></textarea>
           <p>
             The editor allows <a href="http://daringfireball.net/projects/markdown/">Markdown formatting</a> if that's your thing.
           </p>
