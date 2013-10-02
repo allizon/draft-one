@@ -1,2 +1,5 @@
 *.swp
 js/node_modules/*
+js/draft-one.js
+js/draft-one.min.js
+css/style.css
