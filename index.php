@@ -25,7 +25,7 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 	<script type="text/javascript" src="js/backbone-min.js"></script>
 	<script type="text/javascript" src="js/ZeroClipboard.min.js"></script>
 	<script type="text/javascript" src="js/application.js"></script>
-<?php if ( $ENV == 'prod' ): ?>
+<?php if ( $ENV == 'prod' && !isset( $_GET['untrack'] ) ): ?>
 	<script type="text/javascript">
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-273478-15']);
