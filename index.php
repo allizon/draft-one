@@ -1,5 +1,10 @@
 <?php
-$ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
+if ( in_array( $_SERVER['SERVER_NAME'],
+      ['dev-draft1.geex.ws', 'dev.draftone.com'] ) || isset( $_GET['untrack'] ) ) {
+  $ENV = 'dev';
+} else {
+  $ENV = 'prod';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en-us">
@@ -25,7 +30,7 @@ $ENV = $_SERVER['SERVER_NAME'] == 'dev.draft-one.com' ? 'dev' : 'prod';
 	<script type="text/javascript" src="js/backbone-min.js"></script>
 	<script type="text/javascript" src="js/ZeroClipboard.min.js"></script>
 	<script type="text/javascript" src="js/application.js"></script>
-<?php if ( $ENV == 'prod' && !isset( $_GET['untrack'] ) ): ?>
+<?php if ( $ENV == 'prod' ): ?>
 	<script type="text/javascript">
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-273478-15']);
