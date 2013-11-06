@@ -26,7 +26,7 @@ if ( in_array( $_SERVER['SERVER_NAME'],
 	<script type="text/javascript" src="js/less.min.js"></script>
 	<script type="text/javascript" src="js/showdown.js"></script>
 	<script type="text/javascript" src="js/modernizr.js"></script>
-	<script type="text/javascript" src="js/underscore-min.js"></script>
+	<script type="text/javascript" src="js/lodash.min.js"></script>
 	<script type="text/javascript" src="js/backbone-min.js"></script>
 	<script type="text/javascript" src="js/ZeroClipboard.min.js"></script>
 	<script type="text/javascript" src="js/application.js"></script>
