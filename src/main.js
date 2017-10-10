@@ -21,7 +21,7 @@ const router = new VueRouter({
   ]
 });
 
-var D1App = new Vue({
+const D1App = new Vue({
   router,
   template: `
     <div class="d1__editor">
@@ -36,3 +36,7 @@ var D1App = new Vue({
     </div>
   `
 }).$mount('#app');
+
+module.exports = {
+  'D1App': D1App
+};
