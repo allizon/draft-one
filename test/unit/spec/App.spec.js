@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import App from '../../src/App.vue';
+import App from '../../../src/App.vue';
 
 describe('App.vue', () => {
   beforeEach(function() {

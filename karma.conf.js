@@ -8,11 +8,11 @@ module.exports = function(config) {
     webpack: webpackConfig,
     frameworks: ['jasmine'],
     files: [
-      'spec/**/*.spec.js',
+      'test/**/*.spec.js',
       // { pattern: 'spec/fixtures/**/*.json', included: false, served: true },
     ],
     preprocessors: {
-      'spec/**/*.spec.js': ['webpack'],
+      'test/**/*.spec.js': ['webpack'],
       'src/**/*.js': ['webpack']
     },
     browsers: ['Chrome'],

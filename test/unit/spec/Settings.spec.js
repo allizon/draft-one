@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import Export from '../../src/Export.vue';
+import Settings from '../../../src/Settings.vue';
 
-describe('Export.vue', () => {
+describe('Settings.vue', () => {
   beforeEach(function() {
 
   });
@@ -11,7 +11,7 @@ describe('Export.vue', () => {
   });
 
   it('Works some magic', () => {
-    const Constructor = Vue.extend(Export);
+    const Constructor = Vue.extend(Settings);
     const component = new Constructor().$mount();
   });
 });
