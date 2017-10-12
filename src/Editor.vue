@@ -1,9 +1,7 @@
 <template>
 	<div class="d1__editor">
 		<h3>The Editor Component!!</h3>
-		<textarea>
-			{{ placeholder }}
-		</textarea>
+		<textarea>{{ placeholder }}</textarea>
 	</div>
 </template>
 

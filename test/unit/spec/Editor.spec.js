@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Editor from '../../../src/Editor.vue';
+import { getElement } from '../../test_helper.js';
 
-describe('App.vue', () => {
+describe('Editor.vue', () => {
   beforeEach(function() {
 
   });
@@ -15,7 +16,7 @@ describe('App.vue', () => {
   });
 
   it('Works some more magic', () => {
-    const Constructor = Vue.extend(Editor);
-    const component = new Constructor().$mount();
+    const textarea = getElement(Editor).querySelector('textarea');
+    expect(textarea.textContent).toEqual(Editor.data().placeholder);
   });
 });
