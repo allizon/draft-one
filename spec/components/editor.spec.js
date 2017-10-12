@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Editor from '../src/Editor.vue';
+import Editor from '../../src/Editor.vue';
 
 describe('App.vue', () => {
   beforeEach(function() {
@@ -18,6 +18,5 @@ describe('App.vue', () => {
   it('Works some more magic', () => {
     const Constructor = Vue.extend(Editor);
     const component = new Constructor().$mount();
-    console.log(component.$el);
   });
 });
