@@ -8,6 +8,7 @@ import About from './About.vue';
 import Export from './Export.vue';
 import Settings from './Settings.vue';
 
+// Move all of this router stuff to App.vue
 Vue.use(VueRouter);
 
 const router = new VueRouter({
@@ -23,8 +24,9 @@ const router = new VueRouter({
 
 const D1App = new Vue({
   router,
+  el: '#vue',
   template: `
-    <div class="d1__editor">
+    <div class="d1__editor" id="app">
       <router-link to="/">home</router-link> |
       <router-link to="/about">about</router-link> |
       <router-link to="/export">export</router-link> |
@@ -35,7 +37,8 @@ const D1App = new Vue({
       </div>
     </div>
   `
-}).$mount('#app');
+});
+D1App.$mount();
 
 module.exports = {
   'D1App': D1App
