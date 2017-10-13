@@ -1,17 +1,5 @@
 import Vue from 'vue';
+import App from '../../../src/App.vue';
 import Settings from '../../../src/Settings.vue';
+import { getElement } from '../../test_helper.js';
 
-describe('Settings.vue', () => {
-  beforeEach(function() {
-
-  });
-
-  afterEach(function() {
-
-  });
-
-  it('Works some magic', () => {
-    const Constructor = Vue.extend(Settings);
-    const component = new Constructor().$mount();
-  });
-});

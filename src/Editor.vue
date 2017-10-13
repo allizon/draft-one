@@ -1,6 +1,8 @@
 <template>
 	<div class="d1__editor">
 		<h3>The Editor Component!!</h3>
+		<button id="start">Start</button>
+		<button id="stop">Stop</button>
 		<textarea>{{ placeholder }}</textarea>
 	</div>
 </template>
