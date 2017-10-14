@@ -1,11 +1,15 @@
 <template>
-  <div id="app">
-    this is my app
+  <div class="d1__editor" id="app">
+		<navigation />
+		<router-view />
   </div>
 </template>
 
 <script>
-// import Game from './Game.vue';
+import Navigation from './Navigation.vue';
+import Timer from './timer.js';
+
+const timer = new Timer();
 
 export default {
   name: 'app',
@@ -17,7 +21,11 @@ export default {
   },
 
   components: {
-    // Game
+    Navigation
+  },
+
+  getTimer () {
+    return timer;
   }
 }
 </script>
