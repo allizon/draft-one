@@ -1,5 +1,5 @@
 <template>
-	<div class="D1__navigation">
+  <div class="D1__navigation">
     <router-link to="/">home</router-link> |
     <router-link to="/about">about</router-link> |
     <router-link to="/export">export</router-link> |

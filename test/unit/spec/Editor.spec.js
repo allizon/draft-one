@@ -12,6 +12,10 @@ describe('Editor.vue', () => {
 
   });
 
+  it('Starts timer at 0', () => {
+    expect(Editor.data().timeInSeconds).toBe(0);
+  });
+
   it('Displays placeholder text in textarea to start', () => {
     const textarea = getElement(Editor).querySelector('textarea');
     expect(textarea.textContent).toEqual(Editor.data().placeholder);
@@ -35,7 +39,7 @@ describe('Editor.vue: Start button', () => {
 
   it('Clicking start button starts timer', () => {
     const startButton = getElement(Editor).querySelector('button#start');
-    const timer = App.getTimer();
+    const timer = Editor.timer;
     startButton.click();
   });
 });
@@ -49,7 +53,7 @@ describe('Editor.vue: Stop button', () => {
 
   it('Clicking stop button stops timer', () => {
     const stopButton = getElement(Editor).querySelector('button#stop');
-    const timer = App.getTimer();
+    const timer = Editor.timer;
     stopButton.click();
   });
 });

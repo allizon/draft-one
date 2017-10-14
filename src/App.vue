@@ -1,15 +1,14 @@
 <template>
   <div class="d1__editor" id="app">
-		<navigation />
-		<router-view />
+    <navigation />
+    <router-view />
   </div>
 </template>
 
-<script>
+<script type="text/javascript">
+// REMEMBER: Information flows down from the top. Events can bubble
+// up from below.
 import Navigation from './Navigation.vue';
-import Timer from './timer.js';
-
-const timer = new Timer();
 
 export default {
   name: 'app',
@@ -22,10 +21,6 @@ export default {
 
   components: {
     Navigation
-  },
-
-  getTimer () {
-    return timer;
   }
 }
 </script>
