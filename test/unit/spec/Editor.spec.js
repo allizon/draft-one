@@ -41,6 +41,7 @@ describe('Editor.vue: Start button', () => {
     const startButton = getElement(Editor).querySelector('button#start');
     const timer = Editor.timer;
     startButton.click();
+    // expect timer state to be 'running'
   });
 });
 

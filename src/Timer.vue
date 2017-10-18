@@ -1,5 +1,5 @@
 <template>
-	<div class="D1__timer">
+	<div class="d1__timer">
 		timer
 	</div>
 </template>
