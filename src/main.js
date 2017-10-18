@@ -1,4 +1,5 @@
 require('../css/draft-one.sass');
+require('../css/bootstrap.min.css');
 
 import Vue from 'vue';
 import Vuex from 'vuex';
