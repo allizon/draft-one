@@ -24,15 +24,23 @@ const actions = {
 
 };
 
-const mutators = {
+const mutations = {
+  startTimer (state) {
+    state.timer.state = 'running';
+    console.log('starting ticks....');
+  },
 
+  stopTimer (state) {
+    state.timer.state = 'idle';
+    console.log('stopping timer!');
+  },
 };
 
 export default new Vuex.Store({
   state,
   getters,
   actions,
-  mutators
+  mutations
 });
 
 

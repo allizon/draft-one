@@ -22,6 +22,11 @@ describe('Editor.vue', () => {
   });
 });
 
+
+// Not only are the "Clicking..." tests failing, it's running one
+// test that shouldn't even exist (Stop button Clicking start...)
+// So WTF.
+
 describe('Editor.vue: Start button', () => {
   beforeEach(function() {
 
@@ -41,9 +46,11 @@ describe('Editor.vue: Start button', () => {
     const startButton = getElement(Editor).querySelector('button#start');
     const timer = Editor.timer;
     startButton.click();
+    // spy that the function ran?
     // expect timer state to be 'running'
   });
 });
+
 
 describe('Editor.vue: Stop button', () => {
   it('Has a stop button', () => {
