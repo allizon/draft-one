@@ -9,6 +9,7 @@
 // REMEMBER: Information flows down from the top. Events can bubble
 // up from below.
 import Navigation from './Navigation.vue';
+import router from './router.js';
 
 export default {
   data () {
@@ -17,7 +18,8 @@ export default {
     }
   },
   components: {
-    Navigation
+    Navigation,
+    router
   }
 }
 </script>
