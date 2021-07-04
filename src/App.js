@@ -1,4 +1,5 @@
-import './App.css';
+import "./App.css";
+import { Editor } from "./components/editor";
 
 function App() {
   return (
@@ -6,7 +7,7 @@ function App() {
       <h1>draft one i guess, but reactified</h1>
       <div>menu</div>
       <div>timer?</div>
-      <div>text box</div>
+      <Editor />
     </div>
   );
 }
