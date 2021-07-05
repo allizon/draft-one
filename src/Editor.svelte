@@ -1,13 +1,17 @@
 <script>
-  import { PENDING, STARTED, PAUSED, DONE, editorState } from "./store.js";
+  import {
+    PENDING,
+    STARTED,
+    PAUSED,
+    DONE,
+    editorState,
+    wordCount,
+  } from "./store.js";
 
-  let currentEditorState;
-  const unsubscribe = editorState.subscribe(value => {
-    currentEditorState = value;
-  });
+  let textareaValue;
 
   const setEditorState = () => {
-    switch (currentEditorState) {
+    switch ($editorState) {
       case PENDING:
         editorState.set(STARTED);
         return;
@@ -22,8 +26,12 @@
     }
   };
 
+  // Very simple word count function that probably needs tweaking
+  const countWords = str => str.trim().split(/\s+/).length;
+
   const updateWordCount = e => {
-    console.log(e);
+    // console.log(e.key);
+    wordCount.set(countWords(textareaValue));
   };
 
   $: getLabel = () => {
@@ -49,8 +57,13 @@
     <button>start over</button>
     <button>settings</button>
   </div>
-  <textarea name="" id="" cols="30" rows="10" on:keyup="{updateWordCount}"
-  ></textarea>
+  <textarea
+    name=""
+    id=""
+    cols="30"
+    rows="10"
+    on:keyup="{updateWordCount}"
+    bind:value="{textareaValue}"></textarea>
 </div>
 
 <style>
