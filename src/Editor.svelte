@@ -11,6 +11,7 @@
   import { startTimer, pauseTimer } from "./timer";
 
   let textareaValue;
+  $: readonly = $editorState !== STARTED;
 
   const setEditorState = () => {
     switch ($editorState) {
@@ -57,19 +58,26 @@
         break;
     }
   };
+
+  $: getTextareaClass = () => {
+    switch ($editorState) {
+      case PAUSED:
+      case PENDING:
+        return "paused";
+    }
+  };
 </script>
 
 <div class="block column">
   <div class="is-centered">
     <button on:click="{setEditorState}">{getLabel()}</button>
-    <button>start over</button>
     <button>settings</button>
   </div>
   <textarea
-    name=""
-    id=""
     cols="30"
     rows="10"
+    class="{getTextareaClass()}"
+    readonly="{readonly}"
     on:keyup="{updateWordCount}"
     bind:value="{textareaValue}"></textarea>
 </div>
@@ -78,5 +86,9 @@
   textarea {
     height: 600px;
     width: 100%;
+  }
+
+  .paused {
+    background-color: lightgray;
   }
 </style>

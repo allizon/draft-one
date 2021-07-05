@@ -1,4 +1,4 @@
-import { editorState, elapsedTime } from "./store";
+import { elapsedTime } from "./store";
 
 let timer;
 
