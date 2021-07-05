@@ -8,20 +8,28 @@
     wordCount,
   } from "./store.js";
 
+  import { startTimer, pauseTimer } from "./timer";
+
   let textareaValue;
 
   const setEditorState = () => {
     switch ($editorState) {
+      // PENDING -> STARTED
       case PENDING:
         editorState.set(STARTED);
+        startTimer();
         return;
 
+      // STARTED -> PAUSED (todo: depending on the button)
       case STARTED:
         editorState.set(PAUSED);
+        pauseTimer();
         return;
 
+      // PAUSED -> STARTED (todo: depending on the button)
       case PAUSED:
         editorState.set(STARTED);
+        startTimer();
         return;
     }
   };
