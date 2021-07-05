@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
 
-export const PENDING = Symbol("stopped");
+export const PENDING = Symbol("pending");
 export const STARTED = Symbol("started");
 export const PAUSED = Symbol("paused");
 export const DONE = Symbol("done");

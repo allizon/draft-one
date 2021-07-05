@@ -1,9 +1,14 @@
 <script>
   import { PENDING, STARTED, PAUSED, DONE, editorState } from "./store.js";
 
+  let currentEditorState;
+  const unsubscribe = editorState.subscribe((value) => {
+    currentEditorState = value;
+  });
+
   const setEditorState = () => {
-    switch (editorState) {
-      case DONE:
+    switch (currentEditorState) {
+      case PENDING:
         editorState.set(STARTED);
         return;
 
@@ -18,7 +23,7 @@
   };
 
   $: getLabel = () => {
-    switch (editorState) {
+    switch (currentEditorState) {
       case PENDING:
         return "Start";
 
