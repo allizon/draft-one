@@ -2,7 +2,7 @@
   import { PENDING, STARTED, PAUSED, DONE, editorState } from "./store.js";
 
   let currentEditorState;
-  const unsubscribe = editorState.subscribe((value) => {
+  const unsubscribe = editorState.subscribe(value => {
     currentEditorState = value;
   });
 
@@ -22,8 +22,12 @@
     }
   };
 
+  const updateWordCount = e => {
+    console.log(e);
+  };
+
   $: getLabel = () => {
-    switch (currentEditorState) {
+    switch ($editorState) {
       case PENDING:
         return "Start";
 
@@ -41,11 +45,12 @@
 
 <div class="block column">
   <div class="is-centered">
-    <button on:click={setEditorState}>{getLabel()}</button>
+    <button on:click="{setEditorState}">{getLabel()}</button>
     <button>start over</button>
     <button>settings</button>
   </div>
-  <textarea name="" id="" cols="30" rows="10">{editorState}</textarea>
+  <textarea name="" id="" cols="30" rows="10" on:keyup="{updateWordCount}"
+  ></textarea>
 </div>
 
 <style>

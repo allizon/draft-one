@@ -1,3 +1,3 @@
-# Just a Svelte (and Netlify) Test
+# Maybe making this thing a Svelte app
 
-Netlify URL: https://compassionate-jones-23985d.netlify.app/
+Netlify URL: https://gallant-heisenberg-fabe75.netlify.app/
