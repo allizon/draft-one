@@ -39,6 +39,7 @@
   const countWords = str => str.trim().split(/\s+/).length;
 
   const updateWordCount = e => {
+    // set isTyping = true
     // console.log(e.key);
     wordCount.set(countWords(textareaValue));
   };
@@ -86,9 +87,10 @@
   textarea {
     height: 600px;
     width: 100%;
+    padding: 0.5rem;
   }
 
   .paused {
-    background-color: lightgray;
+    background-color: whitesmoke;
   }
 </style>

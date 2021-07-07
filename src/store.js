@@ -9,3 +9,5 @@ export const DONE = Symbol("done");
 export const editorState = writable(PENDING);
 export const wordCount = writable(0);
 export const elapsedTime = writable(0);
+export const slackerTime = writable(0);
+export const isTyping = writable(false);

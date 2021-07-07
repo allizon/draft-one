@@ -10,6 +10,7 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
+    "eslint-plugin-svelte3": "^3.2.0",
     "prettier-plugin-svelte": "^2.3.1",
     "rollup": "^2.3.4",
     "rollup-plugin-css-only": "^3.1.0",
@@ -20,6 +21,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.0.1",
+    "eslint": "^7.30.0",
     "prettier": "^2.3.2",
     "sirv-cli": "^1.0.0",
     "svelte-simple-datatables": "^0.1.25",
